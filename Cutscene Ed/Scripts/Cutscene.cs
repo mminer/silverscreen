@@ -348,6 +348,7 @@ public class Cutscene : MonoBehaviour {
 	/// <returns>The new CutsceneActor object.</returns>
 	public CutsceneActor NewActor (AnimationClip anim, GameObject go) {
 		CutsceneActor actor = GameObject.Find("Actors").AddComponent<CutsceneActor>();
+		actor.name = anim.name;
 		actor.anim = anim;
 		actor.go = go;
 
