@@ -2,7 +2,7 @@
 using UnityEditor;
 
 public class CutsceneAddSubtitle : ScriptableWizard {
-	private string dialog = "";
+	string dialog = "";
 
 	/// <summary>
 	/// Creates a wizard for adding a new subtitle.

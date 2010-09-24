@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// The Cutscene Editor, where tracks and clips can be managed in a fashion similar to non-linear video editors.
 /// </summary>
 public class CutsceneEditor : EditorWindow {
-	public static System.Version version = new System.Version(0, 1);
+	public static System.Version version = new System.Version(0, 2);
 
 	public Cutscene scene {
 		get {
@@ -20,11 +20,7 @@ public class CutsceneEditor : EditorWindow {
 		}
 	}
 
-	GUISkin _style;
-	public GUISkin style {
-		get { return _style; }
-		private set { _style = value; }
-	}
+	public GUISkin style { get; private set; }
 
 	//ICutsceneGUI options;
 	ICutsceneGUI media;
@@ -52,13 +48,9 @@ public class CutsceneEditor : EditorWindow {
 	
 	public Tool currentTool = Tool.MoveResize;
 	
-	public Vector2 timelineScrollPos = Vector2.zero;
+	public Vector2 timelineScrollPos;
 
-	float _timelineMin;
-	public float timelineMin {
-		get { return _timelineMin; }
-		set { _timelineMin = value; }
-	}
+	public float timelineMin { get; set; }
 
 	float _timelineZoom = CutsceneTimeline.timelineZoomMin;
 	public float timelineZoom {

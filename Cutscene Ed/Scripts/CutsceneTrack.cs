@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 
 public class CutsceneTrack : MonoBehaviour {
-	public bool locked = false;
+	public bool locked;
 	[HideInInspector]
 	public Cutscene.MediaType type = Cutscene.MediaType.Shots;
 	public new string name = DefaultName(Cutscene.MediaType.Shots);

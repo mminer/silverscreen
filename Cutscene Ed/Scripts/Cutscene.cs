@@ -9,32 +9,18 @@ public delegate void CutsceneEnd();
 
 [RequireComponent(typeof(Animation))]
 public class Cutscene : MonoBehaviour {
-	public float duration = 30f;
-	public float inPoint = 0f;
-	public float outPoint = 30f;
-	public bool stopPlayer = true;
+	public float duration	= 30f;
+	public float inPoint	= 0f;
+	public float outPoint	= 30f;
+	public bool stopPlayer	= true;
 	public GameObject player;
 
-	public GUIStyle subtitleStyle = null;
+	public GUIStyle subtitleStyle;
 	public Rect subtitlePosition = new Rect(0, 0, 400, 200);
 	
-	CutsceneStart _startFunction = null;
-	public CutsceneStart startFunction {
-		get { return _startFunction; }
-		set { _startFunction = value; }
-	}
-
-	CutscenePause _pauseFunction = null;
-	public CutscenePause pauseFunction {
-		get { return _pauseFunction; }
-		set { _pauseFunction = value; }
-	}
-
-	CutsceneEnd _endFunction = null;
-	public CutsceneEnd endFunction {
-		get { return _endFunction; }
-		set { _endFunction = value; }
-	}
+	public CutsceneStart	startFunction	{ get; set; }
+	public CutscenePause	pauseFunction	{ get; set; }
+	public CutsceneEnd		endFunction		{ get; set; }
 
 	public enum MediaType {
 		Shots = 0,
@@ -62,7 +48,7 @@ public class Cutscene : MonoBehaviour {
 		get { return GetComponentsInChildren<CutsceneSubtitle>(); }
 	}
 
-	private CutsceneSubtitle currentSubtitle;
+	CutsceneSubtitle currentSubtitle;
 
 	public float playhead {
 		get { return animation["master"].time; }

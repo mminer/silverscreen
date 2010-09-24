@@ -5,7 +5,7 @@ class CutsceneAddAudio : ScriptableWizard {
 	//GUISkin		style		= EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
 
 	AudioClip[]	audioClips;
-	AudioClip	selected	= null;
+	AudioClip	selected;
 
 	/// <summary>
 	/// Creates a wizard for adding a new audio clip.

@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 class CutsceneAddActor : ScriptableWizard {
-	GUISkin			style		= EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
-	AnimationClip	selected	= null;
-	GameObject		selectedGO	= null;
+	GUISkin			style = EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
+	AnimationClip	selected;
+	GameObject		selectedGO;
 	
 	/// <summary>
 	/// Creates a wizard for adding a new actor.
