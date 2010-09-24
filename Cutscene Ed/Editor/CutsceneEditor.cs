@@ -7,16 +7,17 @@ using System.Collections.Generic;
 /// The Cutscene Editor, where tracks and clips can be managed in a fashion similar to non-linear video editors.
 /// </summary>
 public class CutsceneEditor : EditorWindow {
-	public static System.Version version = new System.Version(0, 2);
+	public static readonly System.Version version = new System.Version(0, 2);
 
 	public Cutscene scene {
 		get {
 			Object[] scenes = Selection.GetFiltered(typeof(Cutscene), SelectionMode.TopLevel);
-			if (scenes.Length > 0) {
-				return scenes[0] as Cutscene;
-			} else {
+			
+			if (scenes.Length == 0) {
 				return null;
 			}
+			
+			return scenes[0] as Cutscene;
 		}
 	}
 
@@ -29,7 +30,6 @@ public class CutsceneEditor : EditorWindow {
 	ICutsceneGUI timeline;
 
 	public static bool CutsceneSelected {
-		// This shouldn't require a getter, but if it's placed on a single line Unity will crash upon hitting Play.
 		get { return Selection.GetFiltered(typeof(Cutscene), SelectionMode.TopLevel).Length > 0; }
 	}
 
@@ -88,10 +88,7 @@ public class CutsceneEditor : EditorWindow {
 	[MenuItem("Window/Cutscene Editor %9")]
 	public static void OpenEditor () {
 		// Get existing open window or if none, make a new one
-		CutsceneEditor window = GetWindow(typeof(CutsceneEditor), false, "Cutscene Editor") as CutsceneEditor;
-		if (window != null) {
-			window.Show();
-		}
+		GetWindow<CutsceneEditor>(false, "Cutscene Editor").Show();
 	}
 
 	/// <summary>
@@ -159,8 +156,7 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Shot")]
 	static void CreateShotTrack () {
-		Cutscene scene = Selection.activeGameObject.GetComponent<Cutscene>();
-		scene.AddTrack(Cutscene.MediaType.Shots);
+		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Shots);
 	}
 
 	/// <summary>
@@ -177,8 +173,7 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Actor")]
 	static void CreateActorTrack () {
-		Cutscene scene = Selection.activeGameObject.GetComponent<Cutscene>();
-		scene.AddTrack(Cutscene.MediaType.Actors);
+		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Actors);
 	}
 
 	/// <summary>
@@ -195,8 +190,7 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Audio")]
 	static void CreateAudioTrack () {
-		Cutscene scene = Selection.activeGameObject.GetComponent<Cutscene>();
-		scene.AddTrack(Cutscene.MediaType.Audio);
+		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Audio);
 	}
 
 	/// <summary>
@@ -213,8 +207,7 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Subtitle")]
 	static void CreateSubtitleTrack () {
-		Cutscene scene = Selection.activeGameObject.GetComponent<Cutscene>();
-		scene.AddTrack(Cutscene.MediaType.Subtitles);
+		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Subtitles);
 	}
 
 	/// <summary>
@@ -391,71 +384,93 @@ public class CutsceneEditor : EditorWindow {
 		KeyCode key = keyDownEvent.keyCode;
 
 		// Tools:
-
-		if (key == CutsceneHotkeys.MoveResizeTool.key) {		// Move/resize
+		
+		// Move/resize
+		if (key == CutsceneHotkeys.MoveResizeTool.key) {
 			currentTool = Tool.MoveResize;
 			EDebug.Log("Cutscene Editor: switching to Move/Resize tool");
-		} else if (key == CutsceneHotkeys.ScissorsTool.key) {	// Scissors
+		// Scissors
+		} else if (key == CutsceneHotkeys.ScissorsTool.key) {
 			currentTool = Tool.Scissors;
 			EDebug.Log("Cutscene Editor: switching to Scissors tool");
-		} else if (key == CutsceneHotkeys.ZoomTool.key) {		// Zoom
+		// Zoom
+		} else if (key == CutsceneHotkeys.ZoomTool.key) {
 			currentTool = Tool.Zoom;
 			EDebug.Log("Cutscene Editor: switching to Zoom tool");
 		}
 
 		// Timeline navigation:
-
-		else if (key == CutsceneHotkeys.SetInPont.key) {		// Set in point
+		
+		// Set in point
+		else if (key == CutsceneHotkeys.SetInPont.key) {
 			scene.inPoint = scene.playhead;
 			EDebug.Log("Cutscene Editor: setting in point");
-		} else if (key == CutsceneHotkeys.SetOutPoint.key) {	// Set out point
+		// Set out point
+		} else if (key == CutsceneHotkeys.SetOutPoint.key) {
 			scene.outPoint = scene.playhead;
 			EDebug.Log("Cutscene Editor: setting out point");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("left"))) {			// Scrub left
+		// Scrub left
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("left"))) {
 			scene.playhead -= CutsceneTimeline.scrubSmallJump;
 			EDebug.Log("Cutscene Editor: moving playhead left");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#left"))) {			// Scrub left large
+		// Scrub left large
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#left"))) {
 			scene.playhead -= CutsceneTimeline.scrubLargeJump;
 			EDebug.Log("Cutscene Editor: moving playhead left");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("right"))) {			// Scrub right
+		// Scrub right
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("right"))) {
 			scene.playhead += CutsceneTimeline.scrubSmallJump;
 			EDebug.Log("Cutscene Editor: moving playhead right");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#right"))) {		// Scrub right large
+		// Scrub right large
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#right"))) {
 			scene.playhead += CutsceneTimeline.scrubLargeJump;
 			EDebug.Log("Cutscene Editor: moving playhead right");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("up"))) {			// Go to previous split point
+		// Go to previous split point
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("up"))) {
 			scene.playhead = selectedTrack.GetTimeOfNextSplit(scene.playhead);
 			EDebug.Log("Cutscene Editor: moving playhead to previous split point");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("down"))) {			// Go to next split point
+		// Go to next split point
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("down"))) {
 			scene.playhead = selectedTrack.GetTimeOfPreviousSplit(scene.playhead);
 			EDebug.Log("Cutscene Editor: moving playhead to next split point");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#up"))) {			// Go to in point
+		// Go to in point
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#up"))) {
 			scene.playhead = scene.inPoint;
 			EDebug.Log("Cutscene Editor: moving playhead to next split point");
-		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#down"))) {			// Go to out point
+		// Go to out point
+		} else if (keyDownEvent.Equals(Event.KeyboardEvent("#down"))) {
 			scene.playhead = scene.outPoint;
 			EDebug.Log("Cutscene Editor: moving playhead to next split point");
 		}
 
 		// Track selection:
-
-		  else if (key == CutsceneHotkeys.SelectTrack1.key) { // Select track 1
+		
+		// Select track 1
+		  else if (key == CutsceneHotkeys.SelectTrack1.key) {
 			SelectTrackAtIndex(1);
-		} else if (key == CutsceneHotkeys.SelectTrack2.key) { // Select track 2
+		// Select track 2
+		} else if (key == CutsceneHotkeys.SelectTrack2.key) {
 			SelectTrackAtIndex(2);
-		} else if (key == CutsceneHotkeys.SelectTrack3.key) { // Select track 3
+		// Select track 3
+		} else if (key == CutsceneHotkeys.SelectTrack3.key) {
 			SelectTrackAtIndex(3);
-		} else if (key == CutsceneHotkeys.SelectTrack4.key) { // Select track 4
+		// Select track 4
+		} else if (key == CutsceneHotkeys.SelectTrack4.key) {
 			SelectTrackAtIndex(4);
-		} else if (key == CutsceneHotkeys.SelectTrack5.key) { // Select track 5
+		// Select track 5
+		} else if (key == CutsceneHotkeys.SelectTrack5.key) {
 			SelectTrackAtIndex(5);
-		} else if (key == CutsceneHotkeys.SelectTrack6.key) { // Select track 6
+		// Select track 6
+		} else if (key == CutsceneHotkeys.SelectTrack6.key) {
 			SelectTrackAtIndex(6);
-		} else if (key == CutsceneHotkeys.SelectTrack7.key) { // Select track 7
+		// Select track 7
+		} else if (key == CutsceneHotkeys.SelectTrack7.key) {
 			SelectTrackAtIndex(7);
-		} else if (key == CutsceneHotkeys.SelectTrack8.key) { // Select track 8
+		// Select track 8
+		} else if (key == CutsceneHotkeys.SelectTrack8.key) {
 			SelectTrackAtIndex(8);
-		} else if (key == CutsceneHotkeys.SelectTrack9.key) { // Select track 9
+		// Select track 9
+		} else if (key == CutsceneHotkeys.SelectTrack9.key) {
 			SelectTrackAtIndex(9);
 		}
 		

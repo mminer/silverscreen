@@ -6,26 +6,31 @@ class CutscenePlaybackControls : ICutsceneGUI {
 
 	const int buttonWidth = 18;
 
-	readonly Texture inPointIcon	= EditorGUIUtility.LoadRequired("Cutscene Ed/playback_in.png")		as Texture;
-	readonly Texture backIcon		= EditorGUIUtility.LoadRequired("Cutscene Ed/playback_back.png")	as Texture;
-	//readonly Texture playIcon		= EditorGUIUtility.LoadRequired("Cutscene Ed/playback_play.png")	as Texture;
-	readonly Texture forwardIcon	= EditorGUIUtility.LoadRequired("Cutscene Ed/playback_forward.png")	as Texture;
-	readonly Texture outPointIcon	= EditorGUIUtility.LoadRequired("Cutscene Ed/playback_out.png")		as Texture;
-
-	readonly GUIContent inPointLabel;
-	readonly GUIContent backLabel;
-	//readonly GUIContent playLabel;
-	readonly GUIContent forwardLabel;
-	readonly GUIContent outPointLabel;
+	readonly GUIContent inPointLabel = new GUIContent(
+		EditorGUIUtility.LoadRequired("Cutscene Ed/playback_in.png") as Texture,
+		"Go to in point."
+	);
+	readonly GUIContent backLabel = new GUIContent(
+		EditorGUIUtility.LoadRequired("Cutscene Ed/playback_back.png") as Texture,
+		"Go back a second."
+	);
+	/*
+	readonly GUIContent playLabel = new GUIContent(
+		EditorGUIUtility.LoadRequired("Cutscene Ed/playback_play.png") as Texture,
+		"Play."
+	);
+	*/
+	readonly GUIContent forwardLabel = new GUIContent(
+		EditorGUIUtility.LoadRequired("Cutscene Ed/playback_forward.png") as Texture,
+		"Go forward a second."
+	);
+	readonly GUIContent outPointLabel = new GUIContent(
+		EditorGUIUtility.LoadRequired("Cutscene Ed/playback_out.png") as Texture,
+		"Go to out point."
+	);
 
 	public CutscenePlaybackControls (CutsceneEditor ed) {
 		this.ed = ed;
-
-		inPointLabel	= new GUIContent(inPointIcon,	"Go to in point.");
-		backLabel		= new GUIContent(backIcon,		"Go back a second.");
-		//playLabel		= new GUIContent(playIcon,		"Play.");
-		forwardLabel	= new GUIContent(forwardIcon,	"Go forward a second.");
-		outPointLabel	= new GUIContent(outPointIcon,	"Go to out point.");
 	}
 	
 	/// <summary>

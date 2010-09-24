@@ -14,10 +14,7 @@ public class BugReporter : EditorWindow {
 	[MenuItem("Window/Bug Reporter")]
 	public static void OpenEditor () {
 		// Get existing open window or if none, make a new one
-		BugReporter window = GetWindow(typeof(BugReporter), true, "Bug Reporter") as BugReporter;
-		if (window != null) {
-			window.Show();
-		}
+		GetWindow<BugReporter>(true, "Bug Reporter").Show();
 	}
 
 	void OnGUI () {
@@ -37,7 +34,7 @@ public class BugReporter : EditorWindow {
 			GUILayout.FlexibleSpace();
 
 			if (GUILayout.Button(submitLabel, GUILayout.ExpandWidth(false))) {
-				// Do something
+				// TODO Send bug report
 				Debug.Log("Bug report sent.");
 			}
 		EditorGUILayout.EndHorizontal();

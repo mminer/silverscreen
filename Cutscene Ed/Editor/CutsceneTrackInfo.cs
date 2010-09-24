@@ -4,8 +4,15 @@ using UnityEditor;
 class CutsceneTrackInfo : ICutsceneGUI {
 	readonly CutsceneEditor ed;
 
-	readonly Texture visibilityIconTex	= EditorGUIUtility.LoadRequired("Cutscene Ed/icon_eye.png")		as Texture;
-	readonly Texture lockIconTex		= EditorGUIUtility.LoadRequired("Cutscene Ed/icon_lock.png")	as Texture;
+	readonly GUIContent visibilityIcon = new GUIContent("",
+		EditorGUIUtility.LoadRequired("Cutscene Ed/icon_eye.png") as Texture,
+		"Toggle visibility."
+	);
+	
+	readonly GUIContent lockIcon = new GUIContent("",
+		EditorGUIUtility.LoadRequired("Cutscene Ed/icon_lock.png") as Texture,
+		"Toggle track lock."
+	);
 
 	public CutsceneTrackInfo (CutsceneEditor ed) {
 		this.ed = ed;
@@ -30,14 +37,8 @@ class CutsceneTrackInfo : ICutsceneGUI {
 			}
 
 			Rect infoRect = EditorGUILayout.BeginHorizontal(ed.style.GetStyle("Track Info"));
-
-			// Visibility icon
-			GUIContent visibilityIcon = new GUIContent("", visibilityIconTex, "Toggle visibility.");
-			track.enabled = GUILayout.Toggle(track.enabled, visibilityIcon, EditorStyles.miniButtonLeft, GUILayout.ExpandWidth(false));
-
-			// Lock icon
-			GUIContent lockIcon = new GUIContent("", lockIconTex, "Toggle track lock.");
-			track.locked = GUILayout.Toggle(track.locked, lockIcon, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(false));
+			track.enabled	= GUILayout.Toggle(track.enabled, visibilityIcon, EditorStyles.miniButtonLeft, GUILayout.ExpandWidth(false));
+			track.locked	= GUILayout.Toggle(track.locked, lockIcon, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(false));
 
 			GUILayout.Space(10);
 
@@ -64,9 +65,11 @@ class CutsceneTrackInfo : ICutsceneGUI {
 					case 0: // Left mouse button
 						ed.selectedTrack = track;
 						break;
+					
 					case 1: // Right mouse button
 						EditorUtility.DisplayPopupMenu(new Rect(mousePos.x, mousePos.y, 0, 0), "CONTEXT/CutsceneTrack/", new MenuCommand(track));
 						break;
+					
 					default:
 						break;
 				}

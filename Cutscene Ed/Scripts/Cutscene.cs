@@ -23,10 +23,10 @@ public class Cutscene : MonoBehaviour {
 	public CutsceneEnd		endFunction		{ get; set; }
 
 	public enum MediaType {
-		Shots = 0,
-		Actors = 1,
-		Audio = 2,
-		Subtitles = 3
+		Shots,
+		Actors,
+		Audio,
+		Subtitles
 	}
 	public enum EffectType {
 		Filters,
@@ -68,13 +68,15 @@ public class Cutscene : MonoBehaviour {
 	
 	void OnGUI () {
 		/// Displays the current subtitle if there is one
-		if (currentSubtitle != null) {
-			GUI.BeginGroup(subtitlePosition, subtitleStyle);
-				
-				GUILayout.Label(currentSubtitle.dialog, subtitleStyle);
-
-			GUI.EndGroup();
+		if (currentSubtitle == null) {
+			return;
 		}
+		
+		GUI.BeginGroup(subtitlePosition, subtitleStyle);
+			
+			GUILayout.Label(currentSubtitle.dialog, subtitleStyle);
+
+		GUI.EndGroup();
 	}
 	
 	/// <summary>
@@ -325,7 +327,6 @@ public class Cutscene : MonoBehaviour {
 		EDebug.Log("Cutscene: unknown function call from clip " + clip.name);
 	}
 
-
 	/// <summary>
 	/// Creates a new CutsceneShot object and attaches it to a new game object as a child of the Shots game object.
 	/// </summary>
@@ -346,8 +347,7 @@ public class Cutscene : MonoBehaviour {
 	/// </summary>
 	/// <returns>The new CutsceneActor object.</returns>
 	public CutsceneActor NewActor (AnimationClip anim, GameObject go) {
-		GameObject actorsGO = transform.Find("Actors").gameObject;
-		CutsceneActor actor = actorsGO.AddComponent<CutsceneActor>();
+		CutsceneActor actor = GameObject.Find("Actors").AddComponent<CutsceneActor>();
 		actor.anim = anim;
 		actor.go = go;
 
@@ -378,8 +378,7 @@ public class Cutscene : MonoBehaviour {
 	/// <param name="dialog">The dialog to be displayed.</param>
 	/// <returns>The new CutsceneSubtitle object.</returns>
 	public CutsceneSubtitle NewSubtitle (string dialog) {
-		GameObject subtitleGO = transform.Find("Subtitles").gameObject;
-		CutsceneSubtitle subtitle = subtitleGO.AddComponent<CutsceneSubtitle>();
+		CutsceneSubtitle subtitle = GameObject.Find("Subtitles").AddComponent<CutsceneSubtitle>();
 		subtitle.dialog = dialog;
 
 		EDebug.Log("Cutscene Editor: added new subtitle");

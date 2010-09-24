@@ -9,7 +9,7 @@ public class CutsceneAddSubtitle : ScriptableWizard {
 	/// </summary>
 	[MenuItem("Component/Cutscene/Add Media/Subtitle")]
 	public static void CreateWizard () {
-		DisplayWizard("Add Subtitle", typeof(CutsceneAddSubtitle), "Add");
+		DisplayWizard<CutsceneAddSubtitle>("Add Subtitle", "Add");
 	}
 
 	/// <summary>
@@ -49,14 +49,13 @@ public class CutsceneAddSubtitle : ScriptableWizard {
 	void OnWizardUpdate () {
 		helpString = "Type in some dialog to add.";
 		// Only valid if some text has been entered in the text field
-		isValid = dialog == "" ? false : true;
+		isValid = dialog != "";
 	}
 
 	/// <summary>
 	/// Adds the new subtitle to the cutscene.
 	/// </summary>
 	void OnWizardCreate () {
-		Cutscene scene = Selection.activeGameObject.GetComponent<Cutscene>();
-		scene.NewSubtitle(dialog);
+		Selection.activeGameObject.GetComponent<Cutscene>().NewSubtitle(dialog);
 	}
 }

@@ -13,7 +13,7 @@ class CutsceneAddActor : ScriptableWizard {
 	/// </summary>
 	[MenuItem("Component/Cutscene/Add Media/Actor")]
 	public static void CreateWizard () {
-		DisplayWizard("Add Actor", typeof(CutsceneAddActor), "Add");
+		DisplayWizard<CutsceneAddActor>("Add Actor", "Add");
 	}
 
 	/// <summary>
@@ -28,7 +28,6 @@ class CutsceneAddActor : ScriptableWizard {
 	void OnGUI () {
 		OnWizardUpdate();
 
-		// The generic version of FindObjectsOfType appears to be broken
 		Animation[] animations = (Animation[])FindObjectsOfType(typeof(Animation));
 		
 		EditorGUILayout.BeginVertical(style.GetStyle("List Container"));
@@ -41,7 +40,7 @@ class CutsceneAddActor : ScriptableWizard {
 					if (clip == selected) {
 						itemStyle = style.GetStyle("Selected List Item");
 					}
-
+					
 					Rect rect = EditorGUILayout.BeginHorizontal(itemStyle);
 
 						GUIContent itemLabel = new GUIContent(clip.name, EditorGUIUtility.ObjectContent(null, typeof(Animation)).image);
@@ -79,14 +78,13 @@ class CutsceneAddActor : ScriptableWizard {
 	void OnWizardUpdate () {
 		helpString = "Choose an animation to add.";
 		// Only valid if an animation has been selected
-		isValid = selected == null ? false : true;
+		isValid = selected != null;
 	}
 
 	/// <summary>
 	/// Adds the new actor to the cutscene.
 	/// </summary>
 	void OnWizardCreate () {
-		Cutscene scene = Selection.activeGameObject.GetComponent<Cutscene>();
-		scene.NewActor(selected, selectedGO);
+		Selection.activeGameObject.GetComponent<Cutscene>().NewActor(selected, selectedGO);
 	}
 }

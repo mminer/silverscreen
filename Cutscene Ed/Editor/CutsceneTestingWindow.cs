@@ -28,13 +28,12 @@ class CutsceneTestingWindow : EditorWindow {
 	
 	[MenuItem ("Window/Testing Window")]
 	public static void OpenEditor () {
-		CutsceneTestingWindow window = (CutsceneTestingWindow)EditorWindow.GetWindow(typeof(CutsceneTestingWindow));
-		window.Show();
+		EditorWindow.GetWindow<CutsceneTestingWindow>().Show();
 	}
 
-	Rect stuff = new Rect(10, 5, 1000, 500);
-	Rect more = new Rect(10, 10, 100, 100);
-	Vector2 scrollPos = Vector2.zero;
+	Rect stuff	= new Rect(10, 5, 1000, 500);
+	Rect more	= new Rect(10, 10, 100, 100);
+	Vector2 scrollPos;
 
 	public void OnGUI () {
 

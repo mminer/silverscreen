@@ -6,26 +6,16 @@ using System.Collections.Generic;
 class CutsceneEffectsWindow : ICutsceneGUI {
 	readonly CutsceneEditor ed;
 
-	static Dictionary<string, Type> filters {
-		get {
-			Dictionary<string, Type> _filters = new Dictionary<string, Type>();
+	static Dictionary<string, Type> filters = new Dictionary<string, Type>
+	{
+		{ CutsceneBlurFilter.name,		typeof(CutsceneBlurFilter) },
+		{ CutsceneInvertFilter.name,	typeof(CutsceneInvertFilter) }
+	};
 
-			_filters.Add(CutsceneBlurFilter.name, typeof(CutsceneBlurFilter));
-			_filters.Add(CutsceneInvertFilter.name, typeof(CutsceneInvertFilter));
+	static Dictionary<string, Type> transitions = new Dictionary<string, Type> {};
 
-			return _filters;
-		}
-	}
-
-	static Dictionary<string, Type> transitions {
-		get {
-			Dictionary<string, Type> _transitions = new Dictionary<string, Type>();
-			return _transitions;
-		}
-	}
-
-	static readonly GUIContent filtersLabel = new GUIContent("Filters", "Full screen filters.");
-	static readonly GUIContent transitionsLabel = new GUIContent("Transitions", "Camera transitions.");
+	static readonly GUIContent filtersLabel		= new GUIContent("Filters", "Full screen filters.");
+	static readonly GUIContent transitionsLabel	= new GUIContent("Transitions", "Camera transitions.");
 
 	readonly GUIContent[] effectsTabs = CutsceneEditor.HasPro ? new GUIContent[] { filtersLabel, transitionsLabel } : new GUIContent[] { transitionsLabel };
 	Cutscene.EffectType currentEffectsTab = Cutscene.EffectType.Filters;
@@ -73,7 +63,6 @@ class CutsceneEffectsWindow : ICutsceneGUI {
 
 		switch (currentEffectsTab) {
 			case Cutscene.EffectType.Filters:
-
 				foreach (KeyValuePair<string, Type> item in filters) {
 
 					Rect itemRect = EditorGUILayout.BeginHorizontal(selectedEffect == item.Value ? ed.style.GetStyle("Selected List Item") : GUIStyle.none);
@@ -90,6 +79,7 @@ class CutsceneEffectsWindow : ICutsceneGUI {
 					}
 				}
 				break;
+			
 			case Cutscene.EffectType.Transitions:
 				foreach (KeyValuePair<string, Type> item in transitions) {
 
@@ -106,6 +96,7 @@ class CutsceneEffectsWindow : ICutsceneGUI {
 					}
 				}
 				break;
+			
 			default:
 				break;
 		}

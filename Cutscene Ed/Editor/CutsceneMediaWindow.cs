@@ -75,6 +75,7 @@ class CutsceneMediaWindow : ICutsceneGUI {
 				EditorGUILayout.EndScrollView();
 
 				break;
+			
 			case Cutscene.MediaType.Actors:
 				// If the selected item is in a different tab, set it to null
 				if (selectedMediaItem != null && selectedMediaItem.type != currentMediaTab) {
@@ -112,6 +113,7 @@ class CutsceneMediaWindow : ICutsceneGUI {
 				EditorGUILayout.EndScrollView();
 
 				break;
+			
 			case Cutscene.MediaType.Audio:
 				// If the selected item is in a different tab, set it to null
 				if (selectedMediaItem != null && selectedMediaItem.type != currentMediaTab) {
@@ -150,6 +152,7 @@ class CutsceneMediaWindow : ICutsceneGUI {
 				EditorGUILayout.EndScrollView();
 
 				break;
+			
 			case Cutscene.MediaType.Subtitles:
 				// If the selected item is in a different tab, set it to null
 				if (selectedMediaItem != null && selectedMediaItem.type != currentMediaTab) {
@@ -189,6 +192,7 @@ class CutsceneMediaWindow : ICutsceneGUI {
 				EditorGUILayout.EndScrollView();
 
 				break;
+			
 			default:
 				break;
 		}
@@ -234,9 +238,11 @@ class CutsceneMediaWindow : ICutsceneGUI {
 					selectedMediaItem = item;
 					EditorGUIUtility.PingObject(item);
 					break;
+				
 				case 1: // Right click
 					EditorUtility.DisplayPopupMenu(new Rect(mousePos.x, mousePos.y, 0, 0), "CONTEXT/CutsceneObject/", new MenuCommand(item));
 					break;
+				
 				default:
 					break;
 			}

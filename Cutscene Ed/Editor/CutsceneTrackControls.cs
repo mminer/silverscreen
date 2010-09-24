@@ -3,23 +3,20 @@ using UnityEditor;
 
 class CutsceneTrackControls : ICutsceneGUI {
 	readonly CutsceneEditor ed;
-
-	readonly Texture newTrackIcon = EditorGUIUtility.LoadRequired("Cutscene Ed/icon_addtrack.png") as Texture;
-	readonly GUIContent newTrackLabel;
+	
+	readonly GUIContent newTrackLabel = new GUIContent(
+		EditorGUIUtility.LoadRequired("Cutscene Ed/icon_addtrack.png") as Texture,
+		"Add a new track."
+	);
 
 	public CutsceneTrackControls (CutsceneEditor ed) {
 		this.ed = ed;
-
-		newTrackLabel = new GUIContent(newTrackIcon, "Add a new track.");
 	}
 
 	public void OnGUI (Rect rect) {
 		// TODO Make this a style in the cutscene editor's GUISkin
 		GUIStyle popupStyle = "MiniToolbarButton";
-		popupStyle.padding.top		= 2;
-		popupStyle.padding.right	= 0;
-		popupStyle.padding.bottom	= 1;
-		popupStyle.padding.left		= 0;
+		popupStyle.padding = new RectOffset(0, 0, 2, 1); // Left, right, top, bottom
 
 		GUI.BeginGroup(rect, GUI.skin.GetStyle("MiniToolbarButtonLeft"));
 

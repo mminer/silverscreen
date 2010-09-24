@@ -12,7 +12,7 @@ class CutsceneAddAudio : ScriptableWizard {
 	/// </summary>
 	[MenuItem("Component/Cutscene/Add Media/Audio")]
 	public static void CreateWizard () {
-		DisplayWizard("Add Audio", typeof(CutsceneAddAudio), "Add");
+		DisplayWizard<CutsceneAddAudio>("Add Audio", "Add");
 	}
 
 	/// <summary>
@@ -75,14 +75,13 @@ class CutsceneAddAudio : ScriptableWizard {
 	void OnWizardUpdate () {
 		helpString = "Choose an audio clip to add.";
 		// Only valid if an audio clip has been selected
-		isValid = selected == null ? false : true;
+		isValid = selected != null;
 	}
 
 	/// <summary>
 	/// Adds a new audio clip to the cutscene.
 	/// </summary>
 	void OnWizardCreate () {
-		Cutscene scene = Selection.activeGameObject.GetComponent<Cutscene>();
-		scene.NewAudio(selected);
+		Selection.activeGameObject.GetComponent<Cutscene>().NewAudio(selected);
 	}
 }
