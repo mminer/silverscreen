@@ -227,7 +227,7 @@ public class CutsceneEditor : EditorWindow {
 			return;
 		}
 
-		options  = new CutsceneOptions(this);
+		//options  = new CutsceneOptions(this);
 		media    = new CutsceneMediaWindow(this);
 		effects  = new CutsceneEffectsWindow(this);
 		tools    = new CutsceneTools(this);
