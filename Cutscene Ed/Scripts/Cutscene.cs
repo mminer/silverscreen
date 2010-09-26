@@ -9,18 +9,18 @@ public delegate void CutsceneEnd();
 
 [RequireComponent(typeof(Animation))]
 public class Cutscene : MonoBehaviour {
-	public float duration	= 30f;
-	public float inPoint	= 0f;
-	public float outPoint	= 30f;
-	public bool stopPlayer	= true;
+	public float duration  = 30f;
+	public float inPoint   = 0f;
+	public float outPoint  = 30f;
+	public bool stopPlayer = true;
 	public GameObject player;
 
 	public GUIStyle subtitleStyle;
 	public Rect subtitlePosition = new Rect(0, 0, 400, 200);
 	
-	public CutsceneStart	startFunction	{ get; set; }
-	public CutscenePause	pauseFunction	{ get; set; }
-	public CutsceneEnd		endFunction		{ get; set; }
+	public CutsceneStart startFunction { get; set; }
+	public CutscenePause pauseFunction { get; set; }
+	public CutsceneEnd   endFunction   { get; set; }
 
 	public enum MediaType {
 		Shots,
@@ -402,7 +402,7 @@ public class Cutscene : MonoBehaviour {
 		}
 		
 		CutsceneTrack track = gameObject.AddComponent<CutsceneTrack>();
-		track.id = id;
+		track.id   = id;
 		track.type = type;
 		track.name = CutsceneTrack.DefaultName(type);
 		

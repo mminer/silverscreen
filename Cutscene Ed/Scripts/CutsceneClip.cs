@@ -4,9 +4,9 @@ using System;
 public class CutsceneClip : ScriptableObject {
 	public CutsceneMedia master;
 
-	public float timelineStart	= 0f;
-	public float inPoint		= 0f;
-	public float outPoint		= 5f; // Default 5 seconds
+	public float timelineStart = 0f;
+	public float inPoint       = 0f;
+	public float outPoint      = 5f; // Default 5 seconds
 
 	public float timelineEnd {
 		get { return timelineStart + duration; }

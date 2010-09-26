@@ -4,19 +4,19 @@ using UnityEditor;
 class CutsceneTimecodeBar : ICutsceneGUI {
 	readonly CutsceneEditor ed;
 
-	const int shortTickHeight	= 3;
-	const int tallTickHeight	= 6;
+	const int shortTickHeight = 3;
+	const int tallTickHeight  = 6;
 
-	readonly Color tickColor			= Color.gray;
-	readonly Color playheadBlockColor	= Color.black;
-	readonly Color inOutPointColour		= Color.cyan;
+	readonly Color tickColor          = Color.gray;
+	readonly Color playheadBlockColor = Color.black;
+	readonly Color inOutPointColour   = Color.cyan;
 
-	readonly Texture positionIndicatorIcon	= EditorGUIUtility.LoadRequired("Cutscene Ed/position_indicator.png")	as Texture;
-	readonly Texture inPointIndicatorIcon	= EditorGUIUtility.LoadRequired("Cutscene Ed/inpoint_indicator.png")	as Texture;
-	readonly Texture outPointIndicatorIcon	= EditorGUIUtility.LoadRequired("Cutscene Ed/outpoint_indicator.png")	as Texture;
+	readonly Texture positionIndicatorIcon = EditorGUIUtility.LoadRequired("Cutscene Ed/position_indicator.png") as Texture;
+	readonly Texture inPointIndicatorIcon  = EditorGUIUtility.LoadRequired("Cutscene Ed/inpoint_indicator.png")  as Texture;
+	readonly Texture outPointIndicatorIcon = EditorGUIUtility.LoadRequired("Cutscene Ed/outpoint_indicator.png") as Texture;
 
-	readonly GUIContent inTooltip	= new GUIContent("", "In point.");
-	readonly GUIContent outTooltip	= new GUIContent("", "Out point.");
+	readonly GUIContent inTooltip  = new GUIContent("", "In point.");
+	readonly GUIContent outTooltip = new GUIContent("", "Out point.");
 
 	public CutsceneTimecodeBar (CutsceneEditor ed) {
 		this.ed = ed;

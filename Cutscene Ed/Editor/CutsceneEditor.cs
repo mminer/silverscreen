@@ -38,10 +38,10 @@ public class CutsceneEditor : EditorWindow {
 	// Icons:
 
 	public readonly Texture[] mediaIcons = {
-		EditorGUIUtility.LoadRequired("Cutscene Ed/media_shot.png")		as Texture,
-		EditorGUIUtility.LoadRequired("Cutscene Ed/media_actor.png")	as Texture,
-		EditorGUIUtility.LoadRequired("Cutscene Ed/media_audio.png")	as Texture,
-		EditorGUIUtility.LoadRequired("Cutscene Ed/media_subtitle.png")	as Texture
+		EditorGUIUtility.LoadRequired("Cutscene Ed/media_shot.png")     as Texture,
+		EditorGUIUtility.LoadRequired("Cutscene Ed/media_actor.png")    as Texture,
+		EditorGUIUtility.LoadRequired("Cutscene Ed/media_audio.png")    as Texture,
+		EditorGUIUtility.LoadRequired("Cutscene Ed/media_subtitle.png") as Texture
 	};
 
 	// Timeline:
@@ -117,16 +117,16 @@ public class CutsceneEditor : EditorWindow {
 		newScene.AddTrack(Cutscene.MediaType.Subtitles);
 
 		// Create the cutscene's media game objects
-		GameObject shots		= new GameObject("Shots");
-		GameObject actors		= new GameObject("Actors");
-		GameObject audio		= new GameObject("Audio");
-		GameObject subtitles	= new GameObject("Subtitles");
+		GameObject shots     = new GameObject("Shots");
+		GameObject actors    = new GameObject("Actors");
+		GameObject audio     = new GameObject("Audio");
+		GameObject subtitles = new GameObject("Subtitles");
 
 		// Make the media game objects a child of the cutscene
-		shots.transform.parent		= newScene.transform;
-		actors.transform.parent		= newScene.transform;
-		audio.transform.parent		= newScene.transform;
-		subtitles.transform.parent	= newScene.transform;
+		shots.transform.parent     = newScene.transform;
+		actors.transform.parent    = newScene.transform;
+		audio.transform.parent     = newScene.transform;
+		subtitles.transform.parent = newScene.transform;
 
 		// Create the master animation clip
 		AnimationClip masterClip = new AnimationClip();
@@ -227,11 +227,11 @@ public class CutsceneEditor : EditorWindow {
 			return;
 		}
 
-		//options		= new CutsceneOptions(this);
-		media		= new CutsceneMediaWindow(this);
-		effects		= new CutsceneEffectsWindow(this);
-		tools		= new CutsceneTools(this);
-		timeline	= new CutsceneTimeline(this);
+		options  = new CutsceneOptions(this);
+		media    = new CutsceneMediaWindow(this);
+		effects  = new CutsceneEffectsWindow(this);
+		tools    = new CutsceneTools(this);
+		timeline = new CutsceneTimeline(this);
 	}
 
 	/// <summary>

@@ -18,17 +18,17 @@ class CutsceneTimeline : ICutsceneGUI {
 	readonly ICutsceneGUI trackControls;
 	readonly ICutsceneGUI trackInfo;
 
-	public const float timelineZoomMin	= 1f;
-	public const float timelineZoomMax	= 100f;
-	public const float trackInfoWidth	= 160f;
+	public const float timelineZoomMin = 1f;
+	public const float timelineZoomMax = 100f;
+	public const float trackInfoWidth  = 160f;
 	
 	public CutsceneTimeline (CutsceneEditor ed) {
 		this.ed = ed;
 
-		navigation		= new CutsceneNavigation(ed);
-		tracksView		= new CutsceneTracksView(ed);
-		trackControls	= new CutsceneTrackControls(ed);
-		trackInfo		= new CutsceneTrackInfo(ed);
+		navigation    = new CutsceneNavigation(ed);
+		tracksView    = new CutsceneTracksView(ed);
+		trackControls = new CutsceneTrackControls(ed);
+		trackInfo     = new CutsceneTrackInfo(ed);
 	}
 
 	/// <summary>

@@ -37,8 +37,8 @@ class CutsceneTrackInfo : ICutsceneGUI {
 			}
 
 			Rect infoRect = EditorGUILayout.BeginHorizontal(ed.style.GetStyle("Track Info"));
-			track.enabled	= GUILayout.Toggle(track.enabled, visibilityIcon, EditorStyles.miniButtonLeft, GUILayout.ExpandWidth(false));
-			track.locked	= GUILayout.Toggle(track.locked, lockIcon, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(false));
+			track.enabled = GUILayout.Toggle(track.enabled, visibilityIcon, EditorStyles.miniButtonLeft, GUILayout.ExpandWidth(false));
+			track.locked  = GUILayout.Toggle(track.locked, lockIcon, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(false));
 
 			GUILayout.Space(10);
 

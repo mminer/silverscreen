@@ -5,9 +5,9 @@ class CutsceneMediaWindow : ICutsceneGUI {
 	readonly CutsceneEditor ed;
 
 	readonly GUIContent[] mediaTabs = {
-		new GUIContent("Shots", "Camera views."),
-		new GUIContent("Actors", "Animated game objects."),
-		new GUIContent("Audio", "Dialog, background music and sound effects."),
+		new GUIContent("Shots",     "Camera views."),
+		new GUIContent("Actors",    "Animated game objects."),
+		new GUIContent("Audio",     "Dialog, background music and sound effects."),
 		new GUIContent("Subtitles", "Textual versions of dialog.")
 	};
 
@@ -15,8 +15,8 @@ class CutsceneMediaWindow : ICutsceneGUI {
 	Vector2[] mediaScrollPos = { Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero };
 	CutsceneMedia selectedMediaItem;
 
-	readonly GUIContent newMediaLabel		= new GUIContent(EditorGUIUtility.LoadRequired("Cutscene Ed/icon_add.png") as Texture, "Add new media.");
-	readonly GUIContent insertMediaLabel	= new GUIContent("Insert", "Insert the selected shot onto the timeline.");
+	readonly GUIContent newMediaLabel    = new GUIContent(EditorGUIUtility.LoadRequired("Cutscene Ed/icon_add.png") as Texture, "Add new media.");
+	readonly GUIContent insertMediaLabel = new GUIContent("Insert", "Insert the selected shot onto the timeline.");
 
 	public CutsceneMediaWindow (CutsceneEditor ed) {
 		this.ed = ed;

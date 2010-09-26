@@ -4,9 +4,9 @@ using UnityEngine;
 struct Hotkey {
 	const string prefPrefix = "Cutscene Editor Hotkey ";
 
-	string	id;
-	KeyCode	defaultKey;
-	bool	assignable;
+	string  id;
+	KeyCode defaultKey;
+	bool    assignable;
 
 	public KeyCode key {
 		get {
@@ -26,7 +26,7 @@ struct Hotkey {
 	}
 	
 	public Hotkey (string id, KeyCode defaultKey, bool assignable) {
-		this.id			= id;
+		this.id         = id;
 		this.defaultKey = defaultKey;
 		this.assignable = assignable;
 	}
@@ -44,11 +44,11 @@ struct Hotkey {
 
 static class CutsceneHotkeys {
 	// Assignable:
-	public static Hotkey MoveResizeTool	= new Hotkey("moveResizeTool",	KeyCode.M, true);
-	public static Hotkey ScissorsTool	= new Hotkey("scissorsTool",	KeyCode.S, true);
-	public static Hotkey ZoomTool		= new Hotkey("zoomTool",		KeyCode.Z, true);
-	public static Hotkey SetInPont		= new Hotkey("setInPoint",		KeyCode.I, true);
-	public static Hotkey SetOutPoint	= new Hotkey("setOutPoint",		KeyCode.O, true);
+	public static Hotkey MoveResizeTool = new Hotkey("moveResizeTool", KeyCode.M, true);
+	public static Hotkey ScissorsTool   = new Hotkey("scissorsTool",   KeyCode.S, true);
+	public static Hotkey ZoomTool       = new Hotkey("zoomTool",       KeyCode.Z, true);
+	public static Hotkey SetInPont      = new Hotkey("setInPoint",     KeyCode.I, true);
+	public static Hotkey SetOutPoint    = new Hotkey("setOutPoint",    KeyCode.O, true);
 
 	// Unassignable:
 	public static readonly Hotkey SelectTrack1 = new Hotkey("selectTrack1", KeyCode.Alpha1, true);

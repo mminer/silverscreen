@@ -23,10 +23,10 @@ class CutsceneTracksView : ICutsceneGUI {
 		GUI.BeginGroup(background, GUI.skin.GetStyle("AnimationCurveEditorBackground"));
 		GUI.EndGroup();
 
-		float trackHeight	= ed.style.GetStyle("Track").fixedHeight + ed.style.GetStyle("Track").margin.vertical;
+		float trackHeight  = ed.style.GetStyle("Track").fixedHeight + ed.style.GetStyle("Track").margin.vertical;
 		// TODO Make the track width take into account clips that are beyond the out point
-		float tracksWidth	= (ed.scene.outPoint + 10) * ed.timelineZoom;
-		float tracksHeight	= trackHeight * ed.scene.tracks.Length;
+		float tracksWidth  = (ed.scene.outPoint + 10) * ed.timelineZoom;
+		float tracksHeight = trackHeight * ed.scene.tracks.Length;
 
 		Rect view = new Rect(0, 0,
 			Mathf.Max(background.width + 1, tracksWidth),
@@ -36,13 +36,13 @@ class CutsceneTracksView : ICutsceneGUI {
 			
 			// Zoom clicks
 			if (ed.currentTool == Tool.Zoom && Event.current.type == EventType.MouseDown) {
-				if (Event.current.alt && Event.current.shift) {	// Zoom out all the way
+				if (Event.current.alt && Event.current.shift) { // Zoom out all the way
 					ed.timelineZoom = CutsceneTimeline.timelineZoomMin;
-				} else if (Event.current.shift) {				// Zoom in all the way
+				} else if (Event.current.shift) {               // Zoom in all the way
 					ed.timelineZoom = CutsceneTimeline.timelineZoomMax;
-				} else if (Event.current.alt) {					// Zoom out
+				} else if (Event.current.alt) {                 // Zoom out
 					ed.timelineZoom -= 10;
-				} else {										// Zoom in
+				} else {                                        // Zoom in
 					ed.timelineZoom += 10;
 				}
 
@@ -188,14 +188,17 @@ class CutsceneTracksView : ICutsceneGUI {
 
 				if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition)) {
 					ed.dragClip = clip;
-
-					if (move.Contains(Event.current.mousePosition)) { // Move
+				
+					// Move
+					if (move.Contains(Event.current.mousePosition)) {
 						ed.dragEvent = DragEvent.Move;
 						EDebug.Log("Cutscene Editor: starting clip move");
-					} else if (resizeLeft.Contains(Event.current.mousePosition)) { // Resize left
+					// Resize left
+					} else if (resizeLeft.Contains(Event.current.mousePosition)) {
 						ed.dragEvent = DragEvent.ResizeLeft;
 						EDebug.Log("Cutscene Editor: starting clip resize left");
-					} else if (resizeRight.Contains(Event.current.mousePosition)) { // Resize right
+					// Resize right
+					} else if (resizeRight.Contains(Event.current.mousePosition)) {
 						ed.dragEvent = DragEvent.ResizeRight;
 						EDebug.Log("Cutscene Editor: starting clip resize right");
 					}
@@ -308,7 +311,7 @@ class CutsceneTracksView : ICutsceneGUI {
 		Handles.color = Color.black;
 		float pos = ed.scene.playhead * ed.timelineZoom;
 
-		Vector3 timelineTop = new Vector3(pos, 0);
+		Vector3 timelineTop    = new Vector3(pos, 0);
 		Vector3 timelineBottom = new Vector3(pos, rect.yMax);
 		Handles.DrawLine(timelineTop, timelineBottom);
 	}
@@ -320,7 +323,7 @@ class CutsceneTracksView : ICutsceneGUI {
 	void DrawInLine (Rect rect) {
 		float pos = ed.scene.inPoint * ed.timelineZoom;
 
-		Vector3 top = new Vector3(pos, 0);
+		Vector3 top    = new Vector3(pos, 0);
 		Vector3 bottom = new Vector3(pos, rect.yMax);
 		Handles.DrawLine(top, bottom);
 	}
@@ -332,7 +335,7 @@ class CutsceneTracksView : ICutsceneGUI {
 	void DrawOutLine (Rect rect) {
 		float pos = ed.scene.outPoint * ed.timelineZoom;
 
-		Vector3 top = new Vector3(pos, 0);
+		Vector3 top    = new Vector3(pos, 0);
 		Vector3 bottom = new Vector3(pos, rect.yMax);
 		Handles.DrawLine(top, bottom);
 	}

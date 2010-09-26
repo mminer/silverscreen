@@ -11,8 +11,8 @@ class CutsceneNavigation : ICutsceneGUI {
 
 	public CutsceneNavigation (CutsceneEditor ed) {
 		this.ed = ed;
-		playbackControls	= new CutscenePlaybackControls(ed);
-		timecodeBar			= new CutsceneTimecodeBar(ed);
+		playbackControls = new CutscenePlaybackControls(ed);
+		timecodeBar      = new CutsceneTimecodeBar(ed);
 	}
 
 	public void OnGUI (Rect rect) {

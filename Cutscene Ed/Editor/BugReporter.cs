@@ -2,11 +2,11 @@
 using UnityEngine;
 
 public class BugReporter : EditorWindow {
-	string email	= "";
-	string details	= "";
+	string email   = "";
+	string details = "";
 
-	readonly GUIContent emailLabel	= new GUIContent("Your Email", "If we require additional information, we'll contact you at the supplied address (optional).");
-	readonly GUIContent submitLabel = new GUIContent("Submit", "Send this bug report.");
+	readonly GUIContent emailLabel  = new GUIContent("Your Email", "If we require additional information, we'll contact you at the supplied address (optional).");
+	readonly GUIContent submitLabel = new GUIContent("Submit",     "Send this bug report.");
 
 	/// <summary>
 	/// Adds "Bug Reporter" to the Window menu.

@@ -2,10 +2,10 @@
 using UnityEditor;
 
 class CutsceneAddAudio : ScriptableWizard {
-	//GUISkin		style		= EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
+	//GUISkin style = EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
 
-	AudioClip[]	audioClips;
-	AudioClip	selected;
+	AudioClip[] audioClips;
+	AudioClip   selected;
 
 	/// <summary>
 	/// Creates a wizard for adding a new audio clip.

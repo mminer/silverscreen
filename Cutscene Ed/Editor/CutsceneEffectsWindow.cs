@@ -8,14 +8,14 @@ class CutsceneEffectsWindow : ICutsceneGUI {
 
 	static Dictionary<string, Type> filters = new Dictionary<string, Type>
 	{
-		{ CutsceneBlurFilter.name,		typeof(CutsceneBlurFilter) },
-		{ CutsceneInvertFilter.name,	typeof(CutsceneInvertFilter) }
+		{ CutsceneBlurFilter.name,   typeof(CutsceneBlurFilter) },
+		{ CutsceneInvertFilter.name, typeof(CutsceneInvertFilter) }
 	};
 
 	static Dictionary<string, Type> transitions = new Dictionary<string, Type> {};
 
-	static readonly GUIContent filtersLabel		= new GUIContent("Filters", "Full screen filters.");
-	static readonly GUIContent transitionsLabel	= new GUIContent("Transitions", "Camera transitions.");
+	static readonly GUIContent filtersLabel     = new GUIContent("Filters",     "Full screen filters.");
+	static readonly GUIContent transitionsLabel = new GUIContent("Transitions", "Camera transitions.");
 
 	readonly GUIContent[] effectsTabs = CutsceneEditor.HasPro ? new GUIContent[] { filtersLabel, transitionsLabel } : new GUIContent[] { transitionsLabel };
 	Cutscene.EffectType currentEffectsTab = Cutscene.EffectType.Filters;
@@ -23,8 +23,8 @@ class CutsceneEffectsWindow : ICutsceneGUI {
 	Type selectedEffect;
 
 	readonly Texture[] effectsIcons = {
-		EditorGUIUtility.LoadRequired("Cutscene Ed/effects_filter.png")		as Texture,
-		EditorGUIUtility.LoadRequired("Cutscene Ed/effects_transition.png")	as Texture
+		EditorGUIUtility.LoadRequired("Cutscene Ed/effects_filter.png")     as Texture,
+		EditorGUIUtility.LoadRequired("Cutscene Ed/effects_transition.png") as Texture
 	};
 
 	public CutsceneEffectsWindow (CutsceneEditor ed) {
