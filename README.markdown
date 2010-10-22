@@ -1,12 +1,20 @@
-## Release History
+Silver Screen
+=============
 
-### 0.1
-
-* Initial release
-* Compatible with Unity 2.6
+A suite of editor tools for the creation of cinematics using the Unity game
+engine.
 
 
-## License
+Release History
+---------------
+
+- 0.1
+  - Initial release
+  - Compatible with Unity 2.6
+
+
+License
+-------
 
 All code is released under the MIT license.
 
