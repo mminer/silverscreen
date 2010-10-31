@@ -23,7 +23,8 @@
 using UnityEditor;
 using UnityEngine;
 
-public class BugReporter : EditorWindow {
+public class BugReporter : EditorWindow
+{
 	string email   = "";
 	string details = "";
 
@@ -34,12 +35,14 @@ public class BugReporter : EditorWindow {
 	/// Adds "Bug Reporter" to the Window menu.
 	/// </summary>
 	[MenuItem("Window/Bug Reporter")]
-	public static void OpenEditor () {
+	public static void OpenEditor ()
+	{
 		// Get existing open window or if none, make a new one
 		GetWindow<BugReporter>(true, "Bug Reporter").Show();
 	}
 
-	void OnGUI () {
+	void OnGUI ()
+	{
 		GUILayout.Label("Please take a minute to tell us what happened in as much detail as possible. This makes it possible for us to fix the problem.");
 
 		EditorGUILayout.Separator();

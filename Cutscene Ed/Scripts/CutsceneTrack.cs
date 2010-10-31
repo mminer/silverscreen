@@ -24,7 +24,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class CutsceneTrack : MonoBehaviour {
+public class CutsceneTrack : MonoBehaviour
+{
 	public bool locked;
 	[HideInInspector]
 	public Cutscene.MediaType type = Cutscene.MediaType.Shots;
@@ -49,7 +50,8 @@ public class CutsceneTrack : MonoBehaviour {
 		}
 	}
 
-	public static string DefaultName (Cutscene.MediaType type) {
+	public static string DefaultName (Cutscene.MediaType type)
+	{
 		switch (type) {
 			case Cutscene.MediaType.Shots:
 				return "Shots";
@@ -67,7 +69,8 @@ public class CutsceneTrack : MonoBehaviour {
 	/// </summary>
 	/// <param name="time">The time to check for.</param>
 	/// <returns>The CutsceneClip that is at the given time.</returns>
-	public CutsceneClip ContainsClipAtTime (float time, CutsceneClip ignoreClip) {
+	public CutsceneClip ContainsClipAtTime (float time, CutsceneClip ignoreClip)
+	{
 		CutsceneClip contains = ContainsClipAtTime(time);
 
 		if (contains != null && contains != ignoreClip) {
@@ -82,7 +85,8 @@ public class CutsceneTrack : MonoBehaviour {
 	/// </summary>
 	/// <param name="time">The time to check for.</param>
 	/// <returns>The CutsceneClip that is at the given time.</returns>
-	public CutsceneClip ContainsClipAtTime (float time) {
+	public CutsceneClip ContainsClipAtTime (float time)
+	{
 		foreach (CutsceneClip clip in clips) {
 			if (time >= clip.timelineStart && time <= clip.timelineStart + clip.duration) {
 				return clip;
@@ -93,7 +97,8 @@ public class CutsceneTrack : MonoBehaviour {
 		return null;
 	}
 
-	public float GetTimeOfPreviousSplit (float time) {
+	public float GetTimeOfPreviousSplit (float time)
+	{
 		float splitTime = -1f;
 
 		foreach (CutsceneClip clip in clips) {
@@ -108,7 +113,8 @@ public class CutsceneTrack : MonoBehaviour {
 		return splitTime == -1f ? time : splitTime;
 	}
 	
-	public float GetTimeOfNextSplit (float time) {
+	public float GetTimeOfNextSplit (float time)
+	{
 		float splitTime = Mathf.Infinity;
 
 		foreach (CutsceneClip clip in clips) {

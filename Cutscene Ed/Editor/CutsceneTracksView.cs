@@ -23,13 +23,15 @@
 using UnityEngine;
 using UnityEditor;
 
-class CutsceneTracksView : ICutsceneGUI {
+class CutsceneTracksView : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	readonly Texture overlay = EditorGUIUtility.LoadRequired("Cutscene Ed/overlay.png")	as Texture;
 	readonly Color inOutPointColour = Color.cyan;
 
-	public CutsceneTracksView (CutsceneEditor ed) {
+	public CutsceneTracksView (CutsceneEditor ed)
+	{
 		this.ed = ed;
 	}
 	
@@ -37,7 +39,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// Displays the tracks GUI.
 	/// </summary>
 	/// <param name="rect">The tracks' Rect.</param>
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		// Display background
 		Rect background = new Rect(rect.x, rect.y,
 			rect.width - GUI.skin.verticalScrollbar.fixedWidth,
@@ -98,7 +101,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// <summary>
 	/// Displays visual tracks upon which clips sit.
 	/// </summary>
-	void DisplayTrack (Rect rect, CutsceneTrack track) {
+	void DisplayTrack (Rect rect, CutsceneTrack track)
+	{
 		GUI.enabled = track.enabled;
 		
 		for (int i = track.clips.Count - 1; i >= 0; i--) {
@@ -133,7 +137,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// <param name="trackRect">The Rect of the track the clip sits on.</param>
 	/// <param name="track">The track the clip sits on.</param>
 	/// <param name="clip">The clip to display.</param>
-	void DisplayClip (Rect trackRect, CutsceneTrack track, CutsceneClip clip) {
+	void DisplayClip (Rect trackRect, CutsceneTrack track, CutsceneClip clip)
+	{
 		const float trimWidth = 5f;
 
 		GUIStyle clipStyle = ed.style.GetStyle("Selected Clip");
@@ -308,7 +313,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// <param name="clip">The clip to split.</param>
 	/// <param name="mousePosition">The position of the mouse when the split operation occurred.</param>
 	/// <returns>The new clip.</returns>
-	CutsceneClip SplitClip (CutsceneTrack track, CutsceneClip clip, Vector2 mousePosition) {
+	CutsceneClip SplitClip (CutsceneTrack track, CutsceneClip clip, Vector2 mousePosition)
+	{
 		float splitPoint = mousePosition.x / ed.timelineZoom;
 		return CutsceneTimeline.SplitClipAtTime(splitPoint, track, clip);
 	}
@@ -317,7 +323,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// Draws the in, out, and playhead lines.
 	/// </summary>
 	/// <param name="rect">The timeline's Rect.</param>
-	void DrawLines (Rect rect) {
+	void DrawLines (Rect rect)
+	{
 		DrawPlayhead(rect);
 
 		Handles.color = inOutPointColour;
@@ -329,7 +336,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// Draws the playhead over the timeline.
 	/// </summary>
 	/// <param name="rect">The timeline's Rect.</param>
-	void DrawPlayhead (Rect rect) {
+	void DrawPlayhead (Rect rect)
+	{
 		Handles.color = Color.black;
 		float pos = ed.scene.playhead * ed.timelineZoom;
 
@@ -342,7 +350,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// Draws the in point line over the timeline.
 	/// </summary>
 	/// <param name="rect">The timeline's Rect.</param>
-	void DrawInLine (Rect rect) {
+	void DrawInLine (Rect rect)
+	{
 		float pos = ed.scene.inPoint * ed.timelineZoom;
 
 		Vector3 top    = new Vector3(pos, 0);
@@ -354,7 +363,8 @@ class CutsceneTracksView : ICutsceneGUI {
 	/// Draws the out point line over the timeline.
 	/// </summary>
 	/// <param name="rect">The timeline's Rect.</param>
-	void DrawOutLine (Rect rect) {
+	void DrawOutLine (Rect rect)
+	{
 		float pos = ed.scene.outPoint * ed.timelineZoom;
 
 		Vector3 top    = new Vector3(pos, 0);

@@ -23,7 +23,8 @@
 using UnityEditor;
 using UnityEngine;
 
-class CutscenePlaybackControls : ICutsceneGUI {
+class CutscenePlaybackControls : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	const int buttonWidth = 18;
@@ -51,7 +52,8 @@ class CutscenePlaybackControls : ICutsceneGUI {
 		"Go to out point."
 	);
 
-	public CutscenePlaybackControls (CutsceneEditor ed) {
+	public CutscenePlaybackControls (CutsceneEditor ed)
+	{
 		this.ed = ed;
 	}
 	
@@ -59,7 +61,8 @@ class CutscenePlaybackControls : ICutsceneGUI {
 	/// Displays playback controls.
 	/// </summary>
 	/// <param name="rect">The playback controls' Rect.</param>
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		GUI.BeginGroup(rect, EditorStyles.toolbar);
 			
 		// In point

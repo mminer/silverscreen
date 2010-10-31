@@ -27,12 +27,14 @@ using UnityEngine;
 /// A custom inspector for a cutscene.
 /// </summary>
 [CustomEditor(typeof(Cutscene))]
-public class CutsceneInspector : Editor {
+public class CutsceneInspector : Editor
+{
 	Cutscene scene {
 		get { return target as Cutscene; }
 	}
 	
-	public override void OnInspectorGUI () {
+	public override void OnInspectorGUI ()
+	{
 		/*
 		GUILayout.Label("Timing", EditorStyles.boldLabel);
 
@@ -72,7 +74,8 @@ public class CutsceneInspector : Editor {
 		}
 	}
 
-	public void OnSceneGUI () {
+	public void OnSceneGUI ()
+	{
 		Handles.BeginGUI();
 			
 			GUI.Box(new Rect(0, Screen.height - 300, 200, 30), "Cutscene Preview");
@@ -100,7 +103,8 @@ public class CutsceneInspector : Editor {
 		Handles.EndGUI();
 	}
 
-	void DrawCamera (Rect previewRect, Camera camera) {
+	void DrawCamera (Rect previewRect, Camera camera)
+	{
 		if (Event.current.type == EventType.Repaint) {
 			Rect cameraOriginalRect = camera.pixelRect;
 			camera.pixelRect = previewRect;

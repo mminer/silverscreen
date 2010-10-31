@@ -25,7 +25,8 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-class CutsceneEffectsWindow : ICutsceneGUI {
+class CutsceneEffectsWindow : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	static Dictionary<string, Type> filters = new Dictionary<string, Type>
@@ -49,7 +50,8 @@ class CutsceneEffectsWindow : ICutsceneGUI {
 		EditorGUIUtility.LoadRequired("Cutscene Ed/effects_transition.png") as Texture
 	};
 
-	public CutsceneEffectsWindow (CutsceneEditor ed) {
+	public CutsceneEffectsWindow (CutsceneEditor ed)
+	{
 		this.ed = ed;
 	}
 
@@ -57,7 +59,8 @@ class CutsceneEffectsWindow : ICutsceneGUI {
 	/// Displays the effects pane's GUI.
 	/// </summary>
 	/// <param name="rect">The effects pane's Rect.</param>
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		GUILayout.BeginArea(rect, ed.style.GetStyle("Pane"));
 
 		EditorGUILayout.BeginHorizontal();

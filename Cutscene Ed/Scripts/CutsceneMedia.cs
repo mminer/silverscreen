@@ -22,7 +22,8 @@
 
 using UnityEngine;
 
-public abstract class CutsceneMedia : MonoBehaviour {
+public abstract class CutsceneMedia : MonoBehaviour
+{
 	public Cutscene.MediaType type {
 		get {
 			if (this.GetType() == typeof(CutsceneShot)) {

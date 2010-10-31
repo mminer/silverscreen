@@ -27,12 +27,14 @@ using UnityEngine;
 /// A custom inspector for a subtitle.
 /// </summary>
 [CustomEditor (typeof(CutsceneSubtitle))]
-public class CutsceneSubtitleInspector : Editor {
+public class CutsceneSubtitleInspector : Editor
+{
 	CutsceneSubtitle subtitle {
 		get { return target as CutsceneSubtitle; }
 	}
 	
-	public override void OnInspectorGUI () {
+	public override void OnInspectorGUI ()
+	{
 		EditorGUILayout.BeginHorizontal();
 
 			EditorGUILayout.PrefixLabel("Dialog");

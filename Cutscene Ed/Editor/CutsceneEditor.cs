@@ -28,7 +28,8 @@ using System.Collections.Generic;
 /// <summary>
 /// The Cutscene Editor, where tracks and clips can be managed in a fashion similar to non-linear video editors.
 /// </summary>
-public class CutsceneEditor : EditorWindow {
+public class CutsceneEditor : EditorWindow
+{
 	public static readonly System.Version version = new System.Version(0, 2);
 
 	public Cutscene scene {
@@ -108,7 +109,8 @@ public class CutsceneEditor : EditorWindow {
 	/// Adds "Cutscene Editor" to the Window menu.
 	/// </summary>
 	[MenuItem("Window/Cutscene Editor %9")]
-	public static void OpenEditor () {
+	public static void OpenEditor ()
+	{
 		// Get existing open window or if none, make a new one
 		GetWindow<CutsceneEditor>(false, "Cutscene Editor").Show();
 	}
@@ -118,7 +120,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
 	[MenuItem("Window/Cutscene Editor %9", true)]
-	static bool ValidateOpenEditor () {
+	static bool ValidateOpenEditor ()
+	{
 		return CutsceneSelected;
 	}
 
@@ -127,7 +130,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <returns>The new cutscene.</returns>
 	[MenuItem("GameObject/Create Other/Cutscene")]
-	static void CreateCutscene () {
+	static void CreateCutscene ()
+	{
 		// Create the new cutscene game object
 		GameObject newSceneGO = new GameObject("Cutscene", typeof(Cutscene));
 		Cutscene newScene = newSceneGO.GetComponent<Cutscene>();
@@ -166,7 +170,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <returns>The trigger's collider.</returns>
 	[MenuItem("GameObject/Create Other/Cutscene Trigger")]
-	static Collider CreateCutsceneTrigger () {
+	static Collider CreateCutsceneTrigger ()
+	{
 		// Create the new cutscene trigger game object
 		GameObject triggerGO = new GameObject("Cutscene Trigger", typeof(BoxCollider), typeof(CutsceneTrigger));
 		triggerGO.collider.isTrigger = true;
@@ -177,7 +182,8 @@ public class CutsceneEditor : EditorWindow {
 	/// Adds the option to create a new shot track in the Component > Cutscene > Track menu.
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Shot")]
-	static void CreateShotTrack () {
+	static void CreateShotTrack ()
+	{
 		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Shots);
 	}
 
@@ -186,7 +192,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
 	[MenuItem("Component/Cutscene/Track/Shot", true)]
-	static bool ValidateCreateShotTrack () {
+	static bool ValidateCreateShotTrack ()
+	{
 		return CutsceneSelected;
 	}
 
@@ -194,7 +201,8 @@ public class CutsceneEditor : EditorWindow {
 	/// Adds the option to create a new actor track in the Component > Cutscene > Track menu.
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Actor")]
-	static void CreateActorTrack () {
+	static void CreateActorTrack ()
+	{
 		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Actors);
 	}
 
@@ -203,7 +211,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
 	[MenuItem("Component/Cutscene/Track/Actor", true)]
-	static bool ValidateCreateActorTrack () {
+	static bool ValidateCreateActorTrack ()
+	{
 		return CutsceneSelected;
 	}
 
@@ -211,7 +220,8 @@ public class CutsceneEditor : EditorWindow {
 	/// Adds the option to create a new audio track in the Component > Cutscene > Track menu.
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Audio")]
-	static void CreateAudioTrack () {
+	static void CreateAudioTrack ()
+	{
 		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Audio);
 	}
 
@@ -220,7 +230,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
 	[MenuItem("Component/Cutscene/Track/Audio", true)]
-	static bool ValidateCreateAudioTrack () {
+	static bool ValidateCreateAudioTrack ()
+	{
 		return CutsceneSelected;
 	}
 
@@ -228,7 +239,8 @@ public class CutsceneEditor : EditorWindow {
 	/// Adds the option to create a new subtitle track in the Component > Cutscene > Track menu.
 	/// </summary>
 	[MenuItem("Component/Cutscene/Track/Subtitle")]
-	static void CreateSubtitleTrack () {
+	static void CreateSubtitleTrack ()
+	{
 		Selection.activeGameObject.GetComponent<Cutscene>().AddTrack(Cutscene.MediaType.Subtitles);
 	}
 
@@ -237,11 +249,13 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
 	[MenuItem("Component/Cutscene/Track/Subtitle", true)]
-	static bool ValidateCreateSubtitleTrack () {
+	static bool ValidateCreateSubtitleTrack ()
+	{
 		return CutsceneSelected;
 	}
 
-	void OnEnable () {
+	void OnEnable ()
+	{
 		style = EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
 
 		if (style == null) {
@@ -259,7 +273,8 @@ public class CutsceneEditor : EditorWindow {
 	/// <summary>
 	/// Displays the editor GUI.
 	/// </summary>
-	void OnGUI () {
+	void OnGUI ()
+	{
 		if (style == null) {
 			style = EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
 		}
@@ -301,7 +316,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <param name="command">The context menu command.</param>
 	[MenuItem("CONTEXT/CutsceneObject/Delete")]
-	static void DeleteCutsceneMedia (MenuCommand command) {
+	static void DeleteCutsceneMedia (MenuCommand command)
+	{
 		DeleteCutsceneMedia(command.context as CutsceneMedia);
 	}
 
@@ -310,7 +326,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <param name="obj">The media to delete.</param>
 	/// <remarks>This has to be in CutsceneEditor rather than CutsceneTimeline because it uses the DestroyImmediate function, which is only available to classes which inherit from UnityEngine.Object.</remarks>
-	static void DeleteCutsceneMedia (CutsceneMedia obj) {
+	static void DeleteCutsceneMedia (CutsceneMedia obj)
+	{
 		bool delete = true;
 
 		// Display a dialog to prevent accidental deletions
@@ -335,7 +352,8 @@ public class CutsceneEditor : EditorWindow {
 	/// <param name="command">The context menu command.</param>
 	/// <returns>True if the track was successfully deleted, false otherwise.</returns>
 	[MenuItem("CONTEXT/CutsceneTrack/Delete Track")]
-	static bool DeleteTrack (MenuCommand command) {
+	static bool DeleteTrack (MenuCommand command)
+	{
 		return DeleteTrack(command.context as CutsceneTrack);
 	}
 
@@ -344,7 +362,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <param name="track">The track to delete.</param>
 	/// <returns>True if the track was successfully deleted, false otherwise.</returns>
-	static bool DeleteTrack (CutsceneTrack track) {
+	static bool DeleteTrack (CutsceneTrack track)
+	{
 		bool delete = true;
 
 		// Display a dialog to prevent accidental deletions
@@ -365,7 +384,8 @@ public class CutsceneEditor : EditorWindow {
 	/// <param name="command">The context menu command.</param>
 	/// <returns>True if the clip was successfully deleted, false otherwise.</returns>
 	[MenuItem("CONTEXT/CutsceneClip/Delete Clip")]
-	static bool DeleteClip (MenuCommand command) {
+	static bool DeleteClip (MenuCommand command)
+	{
 		return DeleteClip(command.context as CutsceneClip);
 	}
 
@@ -374,7 +394,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <param name="clip">The clip to delete.</param>
 	/// <returns>True if the clip was successfully deleted, false otherwise.</returns>
-	static bool DeleteClip (CutsceneClip clip) {
+	static bool DeleteClip (CutsceneClip clip)
+	{
 		bool delete = true;
 
 		// Display a dialog to prevent accidental deletions
@@ -390,7 +411,8 @@ public class CutsceneEditor : EditorWindow {
 	/// Selects the track at the specified index.
 	/// </summary>
 	/// <param name="index">The track to select.</param>
-	void SelectTrackAtIndex (int index) {
+	void SelectTrackAtIndex (int index)
+	{
 		if (scene.tracks.Length > 0 && index > 0 && index <= scene.tracks.Length) {
 			selectedTrack = scene.tracks[index - 1];
 			EDebug.Log("Cutscene Editor: track " + index + " is selected");
@@ -402,7 +424,8 @@ public class CutsceneEditor : EditorWindow {
 	/// </summary>
 	/// <param name="keyDownEvent">The keyboard event.</param>
 	/// <returns>True if the keyboard shortcut exists, false otherwise.</returns>
-	public void HandleKeyboardShortcuts (Event keyDownEvent) {
+	public void HandleKeyboardShortcuts (Event keyDownEvent)
+	{
 		KeyCode key = keyDownEvent.keyCode;
 
 		// Tools:
@@ -507,7 +530,8 @@ public class CutsceneEditor : EditorWindow {
 		Event.current.Use();
 	}
 
-	public static float PaneTabsWidth (int count) {
+	public static float PaneTabsWidth (int count)
+	{
 		return count * 80f;
 	}
 }

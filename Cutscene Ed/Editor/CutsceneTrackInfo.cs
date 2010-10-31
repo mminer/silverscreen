@@ -23,7 +23,8 @@
 using UnityEngine;
 using UnityEditor;
 
-class CutsceneTrackInfo : ICutsceneGUI {
+class CutsceneTrackInfo : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	readonly GUIContent visibilityIcon = new GUIContent("",
@@ -44,7 +45,8 @@ class CutsceneTrackInfo : ICutsceneGUI {
 	/// Displays the track info GUI.
 	/// </summary>
 	/// <param name="rect">The track info's Rect.</param>
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		ed.timelineScrollPos.y = EditorGUILayout.BeginScrollView(
 			new Vector2(0, ed.timelineScrollPos.y),
 			false, false,

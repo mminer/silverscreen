@@ -22,7 +22,8 @@
 
 using UnityEngine;
 
-public class CutsceneSubtitle : CutsceneMedia {
+public class CutsceneSubtitle : CutsceneMedia
+{
 	public string dialog;
 	
 	public new string name {

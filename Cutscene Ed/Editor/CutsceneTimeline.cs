@@ -29,7 +29,8 @@ public enum DragEvent {
 	ResizeRight
 }
 
-class CutsceneTimeline : ICutsceneGUI {
+class CutsceneTimeline : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	public const int scrubLargeJump = 10;
@@ -44,7 +45,8 @@ class CutsceneTimeline : ICutsceneGUI {
 	public const float timelineZoomMax = 100f;
 	public const float trackInfoWidth  = 160f;
 	
-	public CutsceneTimeline (CutsceneEditor ed) {
+	public CutsceneTimeline (CutsceneEditor ed)
+	{
 		this.ed = ed;
 
 		navigation    = new CutsceneNavigation(ed);
@@ -57,7 +59,8 @@ class CutsceneTimeline : ICutsceneGUI {
 	/// Displays the timeline's GUI.
 	/// </summary>
 	/// <param name="rect">The timeline's Rect.</param>
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		GUILayout.BeginArea(rect);
 
 		float rightColWidth = GUI.skin.verticalScrollbar.fixedWidth;
@@ -100,7 +103,8 @@ class CutsceneTimeline : ICutsceneGUI {
 	/// Moves the playhead.
 	/// </summary>
 	/// <param name="playheadPos">The position to move the playhead to.</param>
-	void MovePlayheadToPosition (float playheadPos) {
+	void MovePlayheadToPosition (float playheadPos)
+	{
 		ed.scene.playhead = playheadPos / ed.timelineZoom;
 	}
 
@@ -111,7 +115,8 @@ class CutsceneTimeline : ICutsceneGUI {
 	/// <param name="track">The track the clip is sitting on.</param>
 	/// <param name="clip">The clip to split.</param>
 	/// <returns>The new clip.</returns>
-	public static CutsceneClip SplitClipAtTime (float splitPoint, CutsceneTrack track, CutsceneClip clip) {
+	public static CutsceneClip SplitClipAtTime (float splitPoint, CutsceneTrack track, CutsceneClip clip)
+	{
 		CutsceneClip newClip = clip.GetCopy();
 
 		// Make sure the clip actually spans over the split point

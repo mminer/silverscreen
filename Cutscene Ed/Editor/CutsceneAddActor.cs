@@ -25,7 +25,8 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-class CutsceneAddActor : ScriptableWizard {
+class CutsceneAddActor : ScriptableWizard
+{
 	GUISkin       style = EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
 	AnimationClip selected;
 	GameObject    selectedGO;
@@ -47,10 +48,11 @@ class CutsceneAddActor : ScriptableWizard {
 		return CutsceneEditor.CutsceneSelected;
 	}
 
-	void OnGUI () {
+	void OnGUI ()
+	{
 		OnWizardUpdate();
-
-		Animation[] animations = (Animation[])FindObjectsOfType(typeof(Animation));
+		
+		Object[] animations = FindObjectsOfType(typeof(Animation));
 		
 		EditorGUILayout.BeginVertical(style.GetStyle("List Container"));
 
@@ -97,7 +99,8 @@ class CutsceneAddActor : ScriptableWizard {
 		GUI.enabled = true;
 	}
 
-	void OnWizardUpdate () {
+	void OnWizardUpdate ()
+	{
 		helpString = "Choose an animation to add.";
 		// Only valid if an animation has been selected
 		isValid = selected != null;
@@ -106,7 +109,8 @@ class CutsceneAddActor : ScriptableWizard {
 	/// <summary>
 	/// Adds the new actor to the cutscene.
 	/// </summary>
-	void OnWizardCreate () {
+	void OnWizardCreate ()
+	{
 		Selection.activeGameObject.GetComponent<Cutscene>().NewActor(selected, selectedGO);
 	}
 }

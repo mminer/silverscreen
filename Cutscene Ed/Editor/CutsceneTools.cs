@@ -29,7 +29,8 @@ public enum Tool {
 	Zoom
 }
 
-class CutsceneTools : ICutsceneGUI {
+class CutsceneTools : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	readonly GUIContent[] tools = {
@@ -38,11 +39,13 @@ class CutsceneTools : ICutsceneGUI {
 		new GUIContent(EditorGUIUtility.LoadRequired("Cutscene Ed/tool_zoom.png")     as Texture, "Zoom")
 	};
 
-	public CutsceneTools (CutsceneEditor ed) {
+	public CutsceneTools (CutsceneEditor ed)
+	{
 		this.ed = ed;
 	}
 
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		GUILayout.BeginArea(rect);
 		
 		EditorGUILayout.BeginHorizontal(ed.style.GetStyle("Tools Bar"), GUILayout.Width(rect.width));

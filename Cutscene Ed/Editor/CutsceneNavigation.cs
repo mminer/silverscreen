@@ -23,7 +23,8 @@
 using UnityEditor;
 using UnityEngine;
 
-class CutsceneNavigation : ICutsceneGUI {
+class CutsceneNavigation : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	readonly ICutsceneGUI playbackControls;
@@ -31,13 +32,15 @@ class CutsceneNavigation : ICutsceneGUI {
 
 	readonly GUIContent zoomButton = new GUIContent("", "Zoom timeline to entire scene.");
 
-	public CutsceneNavigation (CutsceneEditor ed) {
+	public CutsceneNavigation (CutsceneEditor ed)
+	{
 		this.ed = ed;
 		playbackControls = new CutscenePlaybackControls(ed);
 		timecodeBar      = new CutsceneTimecodeBar(ed);
 	}
 
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		GUI.BeginGroup(rect);
 
 		float zoomButtonWidth = GUI.skin.verticalScrollbar.fixedWidth;

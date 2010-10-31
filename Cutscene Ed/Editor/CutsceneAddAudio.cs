@@ -23,7 +23,8 @@
 using UnityEngine;
 using UnityEditor;
 
-class CutsceneAddAudio : ScriptableWizard {
+class CutsceneAddAudio : ScriptableWizard
+{
 	//GUISkin style = EditorGUIUtility.LoadRequired("Cutscene Ed/cutscene_editor_style.guiskin") as GUISkin;
 
 	AudioClip[] audioClips;
@@ -33,7 +34,8 @@ class CutsceneAddAudio : ScriptableWizard {
 	/// Creates a wizard for adding a new audio clip.
 	/// </summary>
 	[MenuItem("Component/Cutscene/Add Media/Audio")]
-	public static void CreateWizard () {
+	public static void CreateWizard ()
+	{
 		DisplayWizard<CutsceneAddAudio>("Add Audio", "Add");
 	}
 
@@ -42,11 +44,13 @@ class CutsceneAddAudio : ScriptableWizard {
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
 	[MenuItem("Component/Cutscene/Add Media/Audio", true)]
-	static bool ValidateCreateWizard () {
+	static bool ValidateCreateWizard ()
+	{
 		return CutsceneEditor.CutsceneSelected;
 	}
 
-	void OnGUI () {
+	void OnGUI ()
+	{
 		OnWizardUpdate();
 
 		// Display temporary workaround info
@@ -94,7 +98,8 @@ class CutsceneAddAudio : ScriptableWizard {
 		GUI.enabled = true;*/
 	}
 
-	void OnWizardUpdate () {
+	void OnWizardUpdate ()
+	{
 		helpString = "Choose an audio clip to add.";
 		// Only valid if an audio clip has been selected
 		isValid = selected != null;
@@ -103,7 +108,8 @@ class CutsceneAddAudio : ScriptableWizard {
 	/// <summary>
 	/// Adds a new audio clip to the cutscene.
 	/// </summary>
-	void OnWizardCreate () {
+	void OnWizardCreate ()
+	{
 		Selection.activeGameObject.GetComponent<Cutscene>().NewAudio(selected);
 	}
 }

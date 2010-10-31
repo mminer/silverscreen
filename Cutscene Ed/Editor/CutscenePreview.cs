@@ -23,14 +23,17 @@
 using UnityEngine;
 using UnityEditor;
 
-class CutscenePreview : ICutsceneGUI {
+class CutscenePreview : ICutsceneGUI
+{
 	//readonly CutsceneEditor ed;
 
-	public CutscenePreview (CutsceneEditor ed) {
+	public CutscenePreview (CutsceneEditor ed)
+	{
 		//this.ed = ed;
 	}
 
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		//GUI.DrawTexture(rect, );
 		Camera cam = GameObject.Find("Some Cam").GetComponent<Camera>();
 		EDebug.Log(cam.name);

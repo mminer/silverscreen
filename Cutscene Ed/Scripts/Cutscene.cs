@@ -30,7 +30,8 @@ public delegate void CutscenePause();
 public delegate void CutsceneEnd();
 
 [RequireComponent(typeof(Animation))]
-public class Cutscene : MonoBehaviour {
+public class Cutscene : MonoBehaviour
+{
 	public float duration  = 30f;
 	public float inPoint   = 0f;
 	public float outPoint  = 30f;
@@ -80,7 +81,8 @@ public class Cutscene : MonoBehaviour {
 	[HideInInspector]
 	public AnimationClip masterClip;
 
-	void Start () {
+	void Start ()
+	{
 		SetupMasterAnimationClip();
 		SetupTrackAnimationClips();
 		
@@ -88,7 +90,8 @@ public class Cutscene : MonoBehaviour {
 		DisableAudio();
 	}
 	
-	void OnGUI () {
+	void OnGUI ()
+	{
 		/// Displays the current subtitle if there is one
 		if (currentSubtitle == null) {
 			return;
@@ -104,14 +107,16 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Visually shows the cutscene in the scene view.
 	/// </summary>
-	void OnDrawGizmos () {
+	void OnDrawGizmos ()
+	{
 		Gizmos.DrawIcon(transform.position, "Cutscene.png");
 	}
 
 	/// <summary>
 	/// Sets the in and out points of the master animation clip.
 	/// </summary>
-	void SetupMasterAnimationClip () {
+	void SetupMasterAnimationClip ()
+	{
 		animation.RemoveClip("master");
 
 		// Create a new event for when the scene starts
@@ -133,7 +138,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Adds each track's animation clip to the main animation.
 	/// </summary>
-	void SetupTrackAnimationClips () {
+	void SetupTrackAnimationClips ()
+	{
 		foreach (CutsceneTrack t in tracks) {
 			if (t.enabled) {
 				AnimationClip trackAnimationClip = t.track;
@@ -147,7 +153,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Turns off all child cameras so that they don't display before the cutscene starts.
 	/// </summary>
-	void DisableCameras () {
+	void DisableCameras ()
+	{
 		Camera[] childCams = GetComponentsInChildren<Camera>();
 		foreach (Camera cam in childCams) {
 			cam.enabled = false;
@@ -158,7 +165,8 @@ public class Cutscene : MonoBehaviour {
 	/// Turns off all child cameras except for the one specified.
 	/// </summary>
 	/// <param name="exemptCam">The camera to stay enabled.</param>
-	void DisableOtherCameras (Camera exemptCam) {
+	void DisableOtherCameras (Camera exemptCam)
+	{
 		Camera[] childCams = GetComponentsInChildren<Camera>();
 		foreach (Camera cam in childCams) {
 			if (cam != exemptCam) {
@@ -170,7 +178,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Keeps all child audio sources from playing once the game starts.
 	/// </summary>
-	void DisableAudio () {
+	void DisableAudio ()
+	{
 		AudioSource[] childAudio = GetComponentsInChildren<AudioSource>();
 		foreach (AudioSource audio in childAudio) {
 			audio.playOnAwake = false;
@@ -180,7 +189,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Starts playing the cutscene.
 	/// </summary>
-	public void PlayCutscene () {
+	public void PlayCutscene ()
+	{
 		// Set up and play the master animation
 		animation["master"].layer = 0;
 		animation.Play("master");
@@ -197,7 +207,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Pauses the cutscene.
 	/// </summary>
-	public void PauseCutscene () {
+	public void PauseCutscene ()
+	{
 		pauseFunction();
 		// TODO actually pause the cutscene
 	}
@@ -205,7 +216,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Called when the scene starts.
 	/// </summary>
-	void SceneStart () {
+	void SceneStart ()
+	{
 		if (startFunction != null) {
 			startFunction();
 		}
@@ -225,7 +237,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Called when the scene ends.
 	/// </summary>
-	void SceneFinish () {
+	void SceneFinish ()
+	{
 		if (endFunction != null) {
 			endFunction();
 		}
@@ -243,7 +256,8 @@ public class Cutscene : MonoBehaviour {
 	/// Shows the specified shot.
 	/// </summary>
 	/// <param name="clip">The shot to show.</summary>
-	void PlayShot (CutsceneClip clip) {
+	void PlayShot (CutsceneClip clip)
+	{
 		Camera cam = ((CutsceneShot)clip.master).camera;
 		cam.enabled = true;
 		
@@ -257,7 +271,8 @@ public class Cutscene : MonoBehaviour {
 	/// </summary>
 	/// <param name="shot">The shot to stop.</param>
 	/// <param name="duration">The time at which to stop the shot.</param>
-	IEnumerator StopShot (Camera cam, float duration) {
+	IEnumerator StopShot (Camera cam, float duration)
+	{
 		yield return new WaitForSeconds(duration);
 		cam.enabled = false;
 		EDebug.Log("Cutscene: stopping shot at " + animation["master"].time);
@@ -267,7 +282,8 @@ public class Cutscene : MonoBehaviour {
 	/// Plays the specified actor.
 	/// </summary>
 	/// <param name="clip">The actor to play.</summary>
-	void PlayActor (CutsceneClip clip) {
+	void PlayActor (CutsceneClip clip)
+	{
 		CutsceneActor actor = ((CutsceneActor)clip.master);
 		AnimationClip anim = actor.anim;
 		GameObject go = ((CutsceneActor)clip.master).go;
@@ -285,7 +301,8 @@ public class Cutscene : MonoBehaviour {
 	/// </summary>
 	/// <param name="actor">The actor to stop.</param>
 	/// <param name="duration">The time at which to stop the actor.</param>
-	IEnumerator StopActor (CutsceneActor actor, float duration) {
+	IEnumerator StopActor (CutsceneActor actor, float duration)
+	{
 		yield return new WaitForSeconds(duration);
 		actor.go.animation.Stop(actor.anim.name);
 		EDebug.Log("Cutscene: stopping actor at " + animation["master"].time);
@@ -295,7 +312,8 @@ public class Cutscene : MonoBehaviour {
 	/// Plays the specified audio.
 	/// </summary>
 	/// <param name="clip">The audio to play.</summary>
-	void PlayAudio (CutsceneClip clip) {
+	void PlayAudio (CutsceneClip clip)
+	{
 		AudioSource aud = ((CutsceneAudio)clip.master).audio;
 		aud.Play();
 		aud.time = clip.inPoint; // Set the point at which the clip plays
@@ -309,7 +327,8 @@ public class Cutscene : MonoBehaviour {
 	/// </summary>
 	/// <param name="aud">The audio source to stop.</param>
 	/// <param name="duration">The time at which to stop the audio.</param>
-	IEnumerator StopAudio (AudioSource aud, float duration) {
+	IEnumerator StopAudio (AudioSource aud, float duration)
+	{
 		yield return new WaitForSeconds(duration);
 		aud.Stop();
 	}
@@ -318,7 +337,8 @@ public class Cutscene : MonoBehaviour {
 	/// Displays the specified subtitle.
 	/// </summary>
 	/// <param name="clip">The subtitle to display.</summary>
-	void PlaySubtitle (CutsceneClip clip) {
+	void PlaySubtitle (CutsceneClip clip)
+	{
 		currentSubtitle = (CutsceneSubtitle)clip.master;
 		EDebug.Log("Displaying subtitle " + clip.name + " at " + animation["master"].time);
 		
@@ -329,7 +349,8 @@ public class Cutscene : MonoBehaviour {
 	/// Stops the subtitle from displaying at its out point.
 	/// </summary>
 	/// <param name="duration">The time at which to stop the audio.</param>
-	IEnumerator StopSubtitle (float duration) {
+	IEnumerator StopSubtitle (float duration)
+	{
 		yield return new WaitForSeconds(duration);
 		currentSubtitle = null;
 	}
@@ -337,7 +358,8 @@ public class Cutscene : MonoBehaviour {
 	/// <summary>
 	/// Stops all subtitles from displaying by setting the current subtitle to null.
 	/// </summary>
-	void StopSubtitle () {
+	void StopSubtitle ()
+	{
 		currentSubtitle = null;
 	}
 	
@@ -345,7 +367,8 @@ public class Cutscene : MonoBehaviour {
 	/// Called when the clip type is unknown.
 	/// </summary>
 	/// <remarks>For debugging only; ideally this will never be called.</remarks>
-	void UnknownFunction (CutsceneClip clip) {
+	void UnknownFunction (CutsceneClip clip)
+	{
 		EDebug.Log("Cutscene: unknown function call from clip " + clip.name);
 	}
 
@@ -353,7 +376,8 @@ public class Cutscene : MonoBehaviour {
 	/// Creates a new CutsceneShot object and attaches it to a new game object as a child of the Shots game object.
 	/// </summary>
 	/// <returns>The new CutsceneShot object.</returns>
-	public CutsceneShot NewShot () {
+	public CutsceneShot NewShot ()
+	{
 		GameObject shot = new GameObject("Camera", typeof(Camera), typeof(CutsceneShot));
 		// Keep the camera from displaying before it's placed on the timeline
 		shot.camera.enabled = false;
@@ -368,7 +392,8 @@ public class Cutscene : MonoBehaviour {
 	/// Creates a new CutsceneActor object and attaches it to a new game object as a child of the Shots game object.
 	/// </summary>
 	/// <returns>The new CutsceneActor object.</returns>
-	public CutsceneActor NewActor (AnimationClip anim, GameObject go) {
+	public CutsceneActor NewActor (AnimationClip anim, GameObject go)
+	{
 		CutsceneActor actor = GameObject.Find("Actors").AddComponent<CutsceneActor>();
 		actor.name = anim.name;
 		actor.anim = anim;
@@ -383,7 +408,8 @@ public class Cutscene : MonoBehaviour {
 	/// </summary>
 	/// <param name="clip">The audio clip to be attached the CutsceneAudio object.</param>
 	/// <returns>The new CutsceneAudio object.</returns>
-	public CutsceneAudio NewAudio (AudioClip clip) {
+	public CutsceneAudio NewAudio (AudioClip clip)
+	{
 		GameObject aud = new GameObject(clip.name, typeof(AudioSource), typeof(CutsceneAudio));
 		aud.audio.clip = clip;
 		// Keep the audio from playing when the game starts
@@ -400,7 +426,8 @@ public class Cutscene : MonoBehaviour {
 	/// </summary>
 	/// <param name="dialog">The dialog to be displayed.</param>
 	/// <returns>The new CutsceneSubtitle object.</returns>
-	public CutsceneSubtitle NewSubtitle (string dialog) {
+	public CutsceneSubtitle NewSubtitle (string dialog)
+	{
 		CutsceneSubtitle subtitle = GameObject.Find("Subtitles").AddComponent<CutsceneSubtitle>();
 		subtitle.dialog = dialog;
 
@@ -412,7 +439,8 @@ public class Cutscene : MonoBehaviour {
 	/// Attaches a new track component to the cutscene.
 	/// </summary>
 	/// <returns>The new cutscene track.</returns>
-	public CutsceneTrack AddTrack (Cutscene.MediaType type) {
+	public CutsceneTrack AddTrack (Cutscene.MediaType type)
+	{
 		int id = 0;
 		// Ensure the new track has a unique ID
 		foreach (CutsceneTrack t in tracks) {

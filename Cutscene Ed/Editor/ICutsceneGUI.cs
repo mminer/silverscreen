@@ -22,7 +22,8 @@
 
 using UnityEngine;
 
-interface ICutsceneGUI {
+interface ICutsceneGUI
+{
 	/// <summary>
 	/// Displays the GUI for this element.
 	/// </summary>

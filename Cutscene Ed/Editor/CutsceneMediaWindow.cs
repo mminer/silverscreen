@@ -23,7 +23,8 @@
 using UnityEditor;
 using UnityEngine;
 
-class CutsceneMediaWindow : ICutsceneGUI {
+class CutsceneMediaWindow : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	readonly GUIContent[] mediaTabs = {
@@ -40,7 +41,8 @@ class CutsceneMediaWindow : ICutsceneGUI {
 	readonly GUIContent newMediaLabel    = new GUIContent(EditorGUIUtility.LoadRequired("Cutscene Ed/icon_add.png") as Texture, "Add new media.");
 	readonly GUIContent insertMediaLabel = new GUIContent("Insert", "Insert the selected shot onto the timeline.");
 
-	public CutsceneMediaWindow (CutsceneEditor ed) {
+	public CutsceneMediaWindow (CutsceneEditor ed)
+	{
 		this.ed = ed;
 	}
 
@@ -48,7 +50,8 @@ class CutsceneMediaWindow : ICutsceneGUI {
 	/// Displays the media pane's GUI.
 	/// </summary>
 	/// <param name="rect">The media pane's Rect.</param>
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		GUILayout.BeginArea(rect, ed.style.GetStyle("Pane"));
 
 		EditorGUILayout.BeginHorizontal();
@@ -252,7 +255,8 @@ class CutsceneMediaWindow : ICutsceneGUI {
 	/// </summary>
 	/// <param name="item">The item clicked on.</param>
 	/// <param name="rect">The item's Rect.</param>
-	void HandleMediaItemClicks (CutsceneMedia item, Rect rect) {
+	void HandleMediaItemClicks (CutsceneMedia item, Rect rect)
+	{
 		Vector2 mousePos = Event.current.mousePosition;
 		if (Event.current.type == EventType.MouseDown && rect.Contains(mousePos)) {
 			switch (Event.current.button) {
@@ -276,7 +280,8 @@ class CutsceneMediaWindow : ICutsceneGUI {
 	/// Determines whether or not the currently selected cutscene object can be inserted into the selected timeline.
 	/// </summary>
 	/// <returns>True if the selected clip and the selected track are the same, false otherwise.</returns>
-	bool IsMediaInsertable () {
+	bool IsMediaInsertable ()
+	{
 		return selectedMediaItem != null && selectedMediaItem.type == ed.selectedTrack.type;
 	}
 
@@ -284,7 +289,8 @@ class CutsceneMediaWindow : ICutsceneGUI {
 	/// Inserts the given cutscene object into the timeline.
 	/// </summary>
 	/// <param name="obj">The cutscene object to insert.</param>
-	void Insert (CutsceneMedia obj) {
+	void Insert (CutsceneMedia obj)
+	{
 		CutsceneClip newClip = new CutsceneClip(obj);
 		newClip.timelineStart = ed.scene.playhead;
 

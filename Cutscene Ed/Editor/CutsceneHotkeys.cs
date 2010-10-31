@@ -23,7 +23,8 @@
 using UnityEditor;
 using UnityEngine;
 
-struct Hotkey {
+struct Hotkey
+{
 	const string prefPrefix = "Cutscene Editor Hotkey ";
 
 	string  id;
@@ -47,7 +48,8 @@ struct Hotkey {
 		}
 	}
 	
-	public Hotkey (string id, KeyCode defaultKey, bool assignable) {
+	public Hotkey (string id, KeyCode defaultKey, bool assignable)
+	{
 		this.id         = id;
 		this.defaultKey = defaultKey;
 		this.assignable = assignable;
@@ -56,7 +58,8 @@ struct Hotkey {
 	/// <summary>
 	/// Resets the key to its default value.
 	/// </summary>
-	public void Reset () {
+	public void Reset ()
+	{
 		if (assignable) {
 			key = defaultKey;
 		}
@@ -64,7 +67,8 @@ struct Hotkey {
 	}
 }
 
-static class CutsceneHotkeys {
+static class CutsceneHotkeys
+{
 	// Assignable:
 	public static Hotkey MoveResizeTool = new Hotkey("moveResizeTool", KeyCode.M, true);
 	public static Hotkey ScissorsTool   = new Hotkey("scissorsTool",   KeyCode.S, true);
@@ -94,7 +98,8 @@ static class CutsceneHotkeys {
 	/// <summary>
 	/// Resets all the assignable hotkeys to their default values.
 	/// </summary>
-	public static void ResetAll () {
+	public static void ResetAll ()
+	{
 		foreach (Hotkey key in assignable) {
 			key.Reset();
 		}

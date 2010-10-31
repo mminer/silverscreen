@@ -30,7 +30,8 @@ public class CutsceneAddSubtitle : ScriptableWizard {
 	/// Creates a wizard for adding a new subtitle.
 	/// </summary>
 	[MenuItem("Component/Cutscene/Add Media/Subtitle")]
-	public static void CreateWizard () {
+	public static void CreateWizard ()
+	{
 		DisplayWizard<CutsceneAddSubtitle>("Add Subtitle", "Add");
 	}
 
@@ -39,11 +40,13 @@ public class CutsceneAddSubtitle : ScriptableWizard {
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
 	[MenuItem("Component/Cutscene/Add Media/Subtitle", true)]
-	static bool ValidateCreateWizard () {
+	static bool ValidateCreateWizard ()
+	{
 		return CutsceneEditor.CutsceneSelected;
 	}
 
-	void OnGUI () {
+	void OnGUI ()
+	{
 		OnWizardUpdate();
 
 		EditorGUILayout.BeginHorizontal();
@@ -68,7 +71,8 @@ public class CutsceneAddSubtitle : ScriptableWizard {
 		GUI.enabled = true;
 	}
 
-	void OnWizardUpdate () {
+	void OnWizardUpdate ()
+	{
 		helpString = "Type in some dialog to add.";
 		// Only valid if some text has been entered in the text field
 		isValid = dialog != "";
@@ -77,7 +81,8 @@ public class CutsceneAddSubtitle : ScriptableWizard {
 	/// <summary>
 	/// Adds the new subtitle to the cutscene.
 	/// </summary>
-	void OnWizardCreate () {
+	void OnWizardCreate ()
+	{
 		Selection.activeGameObject.GetComponent<Cutscene>().NewSubtitle(dialog);
 	}
 }

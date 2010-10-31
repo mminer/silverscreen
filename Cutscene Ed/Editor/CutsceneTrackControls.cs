@@ -23,7 +23,8 @@
 using UnityEngine;
 using UnityEditor;
 
-class CutsceneTrackControls : ICutsceneGUI {
+class CutsceneTrackControls : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 	
 	readonly GUIContent newTrackLabel = new GUIContent(
@@ -31,11 +32,13 @@ class CutsceneTrackControls : ICutsceneGUI {
 		"Add a new track."
 	);
 
-	public CutsceneTrackControls (CutsceneEditor ed) {
+	public CutsceneTrackControls (CutsceneEditor ed)
+	{
 		this.ed = ed;
 	}
 
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		// TODO Make this a style in the cutscene editor's GUISkin
 		GUIStyle popupStyle = "MiniToolbarButton";
 		popupStyle.padding = new RectOffset(0, 0, 2, 1); // Left, right, top, bottom

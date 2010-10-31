@@ -23,7 +23,8 @@
 using UnityEngine;
 using UnityEditor;
 
-class CutsceneTimecodeBar : ICutsceneGUI {
+class CutsceneTimecodeBar : ICutsceneGUI
+{
 	readonly CutsceneEditor ed;
 
 	const int shortTickHeight = 3;
@@ -40,7 +41,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	readonly GUIContent inTooltip  = new GUIContent("", "In point.");
 	readonly GUIContent outTooltip = new GUIContent("", "Out point.");
 
-	public CutsceneTimecodeBar (CutsceneEditor ed) {
+	public CutsceneTimecodeBar (CutsceneEditor ed)
+	{
 		this.ed = ed;
 	}
 
@@ -48,7 +50,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	/// Displays the timecode bar with vertical lines indicating the time and the playhead.
 	/// </summary>
 	/// <param name="rect">The timecode bar's Rect.</param>
-	public void OnGUI (Rect rect) {
+	public void OnGUI (Rect rect)
+	{
 		GUI.BeginGroup(rect);
 		
 		// Create a button that looks like a toolbar
@@ -78,7 +81,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	/// <summary>
 	/// Draws vertical lines representing time increments.
 	/// </summary>
-	void DrawTicks () {
+	void DrawTicks ()
+	{
 		Handles.color = tickColor;
 
 		// Draw short ticks every second
@@ -97,7 +101,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	/// <summary>
 	/// Draws labels indicating the time.
 	/// </summary>
-	void DrawLabels () {
+	void DrawLabels ()
+	{
 		for (float i = 0; i < 1000; i += 10) {
 			float xPos = (i * ed.timelineZoom) - ed.timelineScrollPos.x;
 			GUIContent label = new GUIContent(i + "");
@@ -110,7 +115,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	/// <summary>
 	/// Draws the playhead.
 	/// </summary>
-	void DrawPlayhead () {
+	void DrawPlayhead ()
+	{
 		// Draw position indicator
 		float pos = (ed.scene.playhead * ed.timelineZoom) - ed.timelineScrollPos.x;
 		GUI.DrawTexture(new Rect(pos - 4, 0, 8, 8), positionIndicatorIcon);
@@ -136,7 +142,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	/// <summary>
 	/// Draws the in and out points.
 	/// </summary>
-	void DrawInOutPoints () {
+	void DrawInOutPoints ()
+	{
 		Handles.color = inOutPointColour;
 		
 		DrawInPoint();
@@ -146,7 +153,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	/// <summary>
 	/// Draws the in point.
 	/// </summary>
-	void DrawInPoint () {
+	void DrawInPoint ()
+	{
 		float pos = (ed.scene.inPoint * ed.timelineZoom) - ed.timelineScrollPos.x;
 		
 		// Icon
@@ -165,7 +173,8 @@ class CutsceneTimecodeBar : ICutsceneGUI {
 	/// <summary>
 	/// Draws the out point.
 	/// </summary>
-	void DrawOutPoint () {
+	void DrawOutPoint ()
+	{
 		float pos = (ed.scene.outPoint * ed.timelineZoom) - ed.timelineScrollPos.x;
 		
 		// Icon
