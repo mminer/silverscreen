@@ -13,7 +13,7 @@ public enum BlendMode {
 /// A Utility class for performing various image based rendering tasks.
 [AddComponentMenu("")]
 public class ImageEffects {
-	static Material[] m_BlitMaterials = {null, null, null, null, null, null};
+	static Material[] m_BlitMaterials = new Material[6];
 	
 	static public Material GetBlitMaterial (BlendMode mode) {
 		int index = (int)mode;
