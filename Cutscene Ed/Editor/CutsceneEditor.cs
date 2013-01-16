@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2010 Matthew Miner
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,11 +35,11 @@ public class CutsceneEditor : EditorWindow
 	public Cutscene scene {
 		get {
 			Object[] scenes = Selection.GetFiltered(typeof(Cutscene), SelectionMode.TopLevel);
-			
+
 			if (scenes.Length == 0) {
 				return null;
 			}
-			
+
 			return scenes[0] as Cutscene;
 		}
 	}
@@ -68,9 +68,9 @@ public class CutsceneEditor : EditorWindow
 	};
 
 	// Timeline:
-	
+
 	public Tool currentTool = Tool.MoveResize;
-	
+
 	public Vector2 timelineScrollPos;
 
 	public float timelineMin { get; set; }
@@ -80,7 +80,7 @@ public class CutsceneEditor : EditorWindow
 		get { return _timelineZoom; }
 		set { _timelineZoom = Mathf.Clamp(value, CutsceneTimeline.timelineZoomMin, CutsceneTimeline.timelineZoomMax); }
 	}
-	
+
 	CutsceneTrack _selectedTrack;
 	public CutsceneTrack selectedTrack {
 		get {
@@ -108,7 +108,7 @@ public class CutsceneEditor : EditorWindow
 	/// <summary>
 	/// Adds "Cutscene Editor" to the Window menu.
 	/// </summary>
-	[MenuItem("Window/Cutscene Editor %9")]
+	[MenuItem("Window/Cutscene Editor")]
 	public static void OpenEditor ()
 	{
 		// Get existing open window or if none, make a new one
@@ -119,7 +119,7 @@ public class CutsceneEditor : EditorWindow
 	/// Validates the Cutscene Editor menu item.
 	/// </summary>
 	/// <remarks>The item will be disabled if no cutscene is selected.</remarks>
-	[MenuItem("Window/Cutscene Editor %9", true)]
+	[MenuItem("Window/Cutscene Editor", true)]
 	static bool ValidateOpenEditor ()
 	{
 		return CutsceneSelected;
@@ -135,7 +135,7 @@ public class CutsceneEditor : EditorWindow
 		// Create the new cutscene game object
 		GameObject newSceneGO = new GameObject("Cutscene", typeof(Cutscene));
 		Cutscene newScene = newSceneGO.GetComponent<Cutscene>();
-		
+
 		// Add some tracks to get the user started
 		newScene.AddTrack(Cutscene.MediaType.Shots);
 		newScene.AddTrack(Cutscene.MediaType.Actors);
@@ -429,7 +429,7 @@ public class CutsceneEditor : EditorWindow
 		KeyCode key = keyDownEvent.keyCode;
 
 		// Tools:
-		
+
 		// Move/resize
 		if (key == CutsceneHotkeys.MoveResizeTool.key) {
 			currentTool = Tool.MoveResize;
@@ -445,7 +445,7 @@ public class CutsceneEditor : EditorWindow
 		}
 
 		// Timeline navigation:
-		
+
 		// Set in point
 		else if (key == CutsceneHotkeys.SetInPont.key) {
 			scene.inPoint = scene.playhead;
@@ -489,7 +489,7 @@ public class CutsceneEditor : EditorWindow
 		}
 
 		// Track selection:
-		
+
 		// Select track 1
 		  else if (key == CutsceneHotkeys.SelectTrack1.key) {
 			SelectTrackAtIndex(1);
@@ -518,7 +518,7 @@ public class CutsceneEditor : EditorWindow
 		} else if (key == CutsceneHotkeys.SelectTrack9.key) {
 			SelectTrackAtIndex(9);
 		}
-		
+
 		// Other:
 
 		else {
