@@ -39,7 +39,7 @@ public class EDebug
 		if (debug) Debug.Log(message);
 	}
 
-	public static void Log (object message, UnityEngine.Object context)
+	public static void Log (object message, Object context)
 	{
 		if (debug) Debug.Log(message, context);
 	}
@@ -49,7 +49,7 @@ public class EDebug
 		if (debug) Debug.LogError(message);
 	}
 
-	public static void LogError (object message, UnityEngine.Object context)
+	public static void LogError (object message, Object context)
 	{
 		if (debug) Debug.LogError(message, context);
 	}
@@ -59,7 +59,7 @@ public class EDebug
 		if (debug) Debug.LogWarning(message);
 	}
 
-	public static void LogWarning (object message, UnityEngine.Object context)
+	public static void LogWarning (object message, Object context)
 	{
 		if (debug) Debug.LogWarning(message, context);
 	}

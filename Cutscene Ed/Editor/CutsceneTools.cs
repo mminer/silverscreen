@@ -46,15 +46,13 @@ class CutsceneTools : ICutsceneGUI
 
 	public void OnGUI (Rect rect)
 	{
-		GUILayout.BeginArea(rect);
-		
-		EditorGUILayout.BeginHorizontal(ed.style.GetStyle("Tools Bar"), GUILayout.Width(rect.width));
-
-		GUILayout.FlexibleSpace();
-		ed.currentTool = (Tool)GUILayout.Toolbar((int)ed.currentTool, tools);
-
-		EditorGUILayout.EndHorizontal();
-
-		GUILayout.EndArea();
+		CutsceneGUILayout.Area(delegate {
+			CutsceneEditorGUILayout.Horizontal(delegate {
+				
+				GUILayout.FlexibleSpace();
+				ed.currentTool = (Tool)GUILayout.Toolbar((int)ed.currentTool, tools);
+				
+			}, ed.style.GetStyle("Tools Bar"), GUILayout.Width(rect.width));
+		}, rect);
 	}
 }

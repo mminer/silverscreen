@@ -61,42 +61,42 @@ class CutsceneTimeline : ICutsceneGUI
 	/// <param name="rect">The timeline's Rect.</param>
 	public void OnGUI (Rect rect)
 	{
-		GUILayout.BeginArea(rect);
-
-		float rightColWidth = GUI.skin.verticalScrollbar.fixedWidth;
-		float middleColWidth = rect.width - CutsceneTimeline.trackInfoWidth - rightColWidth;
-
-		ed.timelineMin = CutsceneTimeline.timelineZoomMin * (middleColWidth / ed.scene.duration);
-		ed.timelineZoom = Mathf.Clamp(ed.timelineZoom, ed.timelineMin, CutsceneTimeline.timelineZoomMax);
-
-		// Navigation bar
-		Rect navigationRect = GUILayoutUtility.GetRect(GUIContent.none, EditorStyles.toolbar, GUILayout.Width(rect.width));
-		navigation.OnGUI(navigationRect);
-
-		// Begin Tracks
-		EditorGUILayout.BeginHorizontal(GUILayout.Width(rect.width), GUILayout.ExpandHeight(true));
-
-			// Track info
-			//Rect trackInfoRect = GUILayoutUtility.GetRect(trackInfoWidth, rect.height - navigationRect.yMax - GUI.skin.horizontalScrollbar.fixedHeight);
-			Rect trackInfoRect = new Rect(0, 0, CutsceneTimeline.trackInfoWidth, 9999);
-			trackInfo.OnGUI(trackInfoRect);
-
-			// Track controls
-			float trackControlsHeight = GUI.skin.horizontalScrollbar.fixedHeight;
-			Rect trackControlsRect = new Rect(0, rect.height - trackControlsHeight, CutsceneTimeline.trackInfoWidth, trackControlsHeight);
-			trackControls.OnGUI(trackControlsRect);
-
-			// Tracks
-			Rect tracksRect = new Rect(trackInfoRect.xMax, navigationRect.yMax, middleColWidth + rightColWidth, rect.height - navigationRect.yMax);
-			tracksView.OnGUI(tracksRect);
-		
-		EditorGUILayout.EndHorizontal();
-
-		if (Event.current.type == EventType.KeyDown) { // Key presses
-			ed.HandleKeyboardShortcuts(Event.current);
-		}
-
-		GUILayout.EndArea();
+		CutsceneGUILayout.Area(delegate {
+			
+			float rightColWidth = GUI.skin.verticalScrollbar.fixedWidth;
+			float middleColWidth = rect.width - CutsceneTimeline.trackInfoWidth - rightColWidth;
+	
+			ed.timelineMin = CutsceneTimeline.timelineZoomMin * (middleColWidth / ed.scene.duration);
+			ed.timelineZoom = Mathf.Clamp(ed.timelineZoom, ed.timelineMin, CutsceneTimeline.timelineZoomMax);
+	
+			// Navigation bar
+			Rect navigationRect = GUILayoutUtility.GetRect(GUIContent.none, EditorStyles.toolbar, GUILayout.Width(rect.width));
+			navigation.OnGUI(navigationRect);
+	
+			// Begin Tracks
+			CutsceneEditorGUILayout.Horizontal(delegate {
+				
+				// Track info
+				//Rect trackInfoRect = GUILayoutUtility.GetRect(trackInfoWidth, rect.height - navigationRect.yMax - GUI.skin.horizontalScrollbar.fixedHeight);
+				Rect trackInfoRect = new Rect(0, 0, CutsceneTimeline.trackInfoWidth, 9999);
+				trackInfo.OnGUI(trackInfoRect);
+	
+				// Track controls
+				float trackControlsHeight = GUI.skin.horizontalScrollbar.fixedHeight;
+				Rect trackControlsRect = new Rect(0, rect.height - trackControlsHeight, CutsceneTimeline.trackInfoWidth, trackControlsHeight);
+				trackControls.OnGUI(trackControlsRect);
+	
+				// Tracks
+				Rect tracksRect = new Rect(trackInfoRect.xMax, navigationRect.yMax, middleColWidth + rightColWidth, rect.height - navigationRect.yMax);
+				tracksView.OnGUI(tracksRect);
+				
+			}, GUILayout.Width(rect.width), GUILayout.ExpandHeight(true));
+	
+			if (Event.current.type == EventType.KeyDown) { // Key presses
+				ed.HandleKeyboardShortcuts(Event.current);
+			}
+			
+		}, rect);
 	}
 
 	/// <summary>
