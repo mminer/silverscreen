@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2010 Matthew Miner
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,7 +40,7 @@ public class Cutscene : MonoBehaviour
 
 	public GUIStyle subtitleStyle;
 	public Rect subtitlePosition = new Rect(0, 0, 400, 200);
-	
+
 	public CutsceneStart startFunction { get; set; }
 	public CutscenePause pauseFunction { get; set; }
 	public CutsceneEnd   endFunction   { get; set; }
@@ -85,25 +85,25 @@ public class Cutscene : MonoBehaviour
 	{
 		SetupMasterAnimationClip();
 		SetupTrackAnimationClips();
-		
+
 		DisableCameras();
 		DisableAudio();
 	}
-	
+
 	void OnGUI ()
 	{
 		/// Displays the current subtitle if there is one
 		if (currentSubtitle == null) {
 			return;
 		}
-		
+
 		GUI.BeginGroup(subtitlePosition, subtitleStyle);
-			
+
 			GUILayout.Label(currentSubtitle.dialog, subtitleStyle);
 
 		GUI.EndGroup();
 	}
-	
+
 	/// <summary>
 	/// Visually shows the cutscene in the scene view.
 	/// </summary>
@@ -130,7 +130,7 @@ public class Cutscene : MonoBehaviour
 		finish.time = outPoint;
 		finish.functionName = "SceneFinish";
 		masterClip.AddEvent(finish);
-		
+
 		animation.AddClip(masterClip, "master");
 		animation["master"].time = inPoint;
 	}
@@ -149,7 +149,7 @@ public class Cutscene : MonoBehaviour
 			}
 		}
 	}
-	
+
 	/// <summary>
 	/// Turns off all child cameras so that they don't display before the cutscene starts.
 	/// </summary>
@@ -160,7 +160,7 @@ public class Cutscene : MonoBehaviour
 			cam.enabled = false;
 		}
 	}
-	
+
 	/// <summary>
 	/// Turns off all child cameras except for the one specified.
 	/// </summary>
@@ -174,7 +174,7 @@ public class Cutscene : MonoBehaviour
 			}
 		}
 	}
-	
+
 	/// <summary>
 	/// Keeps all child audio sources from playing once the game starts.
 	/// </summary>
@@ -203,7 +203,7 @@ public class Cutscene : MonoBehaviour
 			}
 		}
 	}
-	
+
 	/// <summary>
 	/// Pauses the cutscene.
 	/// </summary>
@@ -225,15 +225,15 @@ public class Cutscene : MonoBehaviour
 		// Stop the player from being able to move
 		if (player != null && stopPlayer) {
 			EDebug.Log("Cutscene: deactivating player");
-			player.active = false;
+			player.SetActive(false);
 		}
-		
+
 		DisableCameras();
 		currentSubtitle = null;
 
 		EDebug.Log("Cutscene: scene started at " + animation["master"].time);
 	}
-	
+
 	/// <summary>
 	/// Called when the scene ends.
 	/// </summary>
@@ -246,12 +246,12 @@ public class Cutscene : MonoBehaviour
 		// Allow the player to move again
 		if (player != null) {
 			EDebug.Log("Cutscene: activating player");
-			player.active = true;
+			player.SetActive(true);
 		}
-		
+
 		EDebug.Log("Cutscene: scene finished at " + animation["master"].time);
 	}
-	
+
 	/// <summary>
 	/// Shows the specified shot.
 	/// </summary>
@@ -260,12 +260,12 @@ public class Cutscene : MonoBehaviour
 	{
 		Camera cam = ((CutsceneShot)clip.master).camera;
 		cam.enabled = true;
-		
+
 		StartCoroutine(StopShot(cam, clip.duration));
 
 		EDebug.Log("Cutscene: showing camera " + clip.name + " at " + animation["master"].time);
 	}
-	
+
 	/// <summary>
 	/// Stops the shot from playing at its out point.
 	/// </summary>
@@ -277,7 +277,7 @@ public class Cutscene : MonoBehaviour
 		cam.enabled = false;
 		EDebug.Log("Cutscene: stopping shot at " + animation["master"].time);
 	}
-	
+
 	/// <summary>
 	/// Plays the specified actor.
 	/// </summary>
@@ -287,15 +287,15 @@ public class Cutscene : MonoBehaviour
 		CutsceneActor actor = ((CutsceneActor)clip.master);
 		AnimationClip anim = actor.anim;
 		GameObject go = ((CutsceneActor)clip.master).go;
-		
+
 		go.animation[anim.name].time = clip.inPoint;
 
 		go.animation.Play(anim.name);
 		StartCoroutine(StopActor(actor, clip.duration));
-		
+
 		EDebug.Log("Cutscene: showing actor " + clip.name + " at " + animation["master"].time);
 	}
-	
+
 	/// <summary>
 	/// Stops the actor from playing at its out point.
 	/// </summary>
@@ -307,7 +307,7 @@ public class Cutscene : MonoBehaviour
 		actor.go.animation.Stop(actor.anim.name);
 		EDebug.Log("Cutscene: stopping actor at " + animation["master"].time);
 	}
-	
+
 	/// <summary>
 	/// Plays the specified audio.
 	/// </summary>
@@ -321,7 +321,7 @@ public class Cutscene : MonoBehaviour
 
 		EDebug.Log("Playing audio " + clip.name + " at " + animation["master"].time);
 	}
-	
+
 	/// <summary>
 	/// Stops the audio from playing at its out point.
 	/// </summary>
@@ -332,7 +332,7 @@ public class Cutscene : MonoBehaviour
 		yield return new WaitForSeconds(duration);
 		aud.Stop();
 	}
-	
+
 	/// <summary>
 	/// Displays the specified subtitle.
 	/// </summary>
@@ -341,10 +341,10 @@ public class Cutscene : MonoBehaviour
 	{
 		currentSubtitle = (CutsceneSubtitle)clip.master;
 		EDebug.Log("Displaying subtitle " + clip.name + " at " + animation["master"].time);
-		
+
 		StartCoroutine(StopSubtitle(clip.duration));
 	}
-	
+
 	/// <summary>
 	/// Stops the subtitle from displaying at its out point.
 	/// </summary>
@@ -354,7 +354,7 @@ public class Cutscene : MonoBehaviour
 		yield return new WaitForSeconds(duration);
 		currentSubtitle = null;
 	}
-	
+
 	/// <summary>
 	/// Stops all subtitles from displaying by setting the current subtitle to null.
 	/// </summary>
@@ -362,7 +362,7 @@ public class Cutscene : MonoBehaviour
 	{
 		currentSubtitle = null;
 	}
-	
+
 	/// <summary>
 	/// Called when the clip type is unknown.
 	/// </summary>
@@ -450,12 +450,12 @@ public class Cutscene : MonoBehaviour
 				break;
 			}
 		}
-		
+
 		CutsceneTrack track = gameObject.AddComponent<CutsceneTrack>();
 		track.id   = id;
 		track.type = type;
 		track.name = CutsceneTrack.DefaultName(type);
-		
+
 		EDebug.Log("Cutscene Editor: added new track of type " + type);
 		return track;
 	}
