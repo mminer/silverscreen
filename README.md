@@ -3,6 +3,10 @@ Silver Screen
 
 Editor tools for creating cinematics using the Unity game engine.
 
+I haven't updated this in ages. If you're looking for a cutscene editor, there
+are numerous good options on the Asset Store that are more likely to work well
+with the latest version of Unity.
+
 
 Release History
 ---------------
